@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/widgets/already_have_account_check.dart';
 import 'package:khedma_link/constants/widgets/rounded_button.dart';
 import 'package:khedma_link/constants/widgets/rounded_input_field.dart';
@@ -32,7 +31,16 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
+              },
             ),
             SizedBox(height: size.height * 0.09),
             AlreadyHaveAnAccountCheck(

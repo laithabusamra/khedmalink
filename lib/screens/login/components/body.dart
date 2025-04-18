@@ -4,8 +4,10 @@ import 'package:khedma_link/constants/widgets/already_have_account_check.dart';
 import 'package:khedma_link/constants/widgets/rounded_button.dart';
 import 'package:khedma_link/constants/widgets/rounded_input_field.dart';
 import 'package:khedma_link/constants/widgets/rounded_password_field.dart';
+import 'package:khedma_link/navigation_menu.dart';
 import 'package:khedma_link/screens/Signup/signup_screen.dart';
 import 'package:khedma_link/screens/login/components/background.dart';
+// import 'package:khedma_link/screens/login/login_screen.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -38,7 +40,16 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const NavigationMenu();
+                    },
+                  ),
+                );
+              },
               color: secondeButtounColor2,
             ),
             SizedBox(
