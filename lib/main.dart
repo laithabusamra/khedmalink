@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:khedma_link/constants/colors.dart';
-import 'package:khedma_link/screens/home.dart';
 import 'package:khedma_link/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Auth',
       theme: ThemeData(
           primaryColor: buttounColor, scaffoldBackgroundColor: backGColor),
-      home: WelcomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

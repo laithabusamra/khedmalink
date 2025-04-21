@@ -34,11 +34,10 @@ class Body extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return SignupScreen();
+                        return const SignupScreen();
                       },
                     ),
                   );
-                  ;
                 }),
             RoundedButton(
               text: "Login",
@@ -49,7 +48,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginScreen();
+                      return const LoginScreen();
                     },
                   ),
                 );

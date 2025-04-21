@@ -10,6 +10,8 @@ import 'package:khedma_link/screens/login/components/background.dart';
 // import 'package:khedma_link/screens/login/login_screen.dart';
 
 class Body extends StatelessWidget {
+  const Body({super.key});
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -61,7 +63,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignupScreen();
+                      return const SignupScreen();
                     },
                   ),
                 );
