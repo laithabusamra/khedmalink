@@ -10,8 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  carousel_slider: ^5.0.0
   get: ^4.6.5  # Properly indented and updated version
   cupertino_icons: ^1.0.8
+  iconsax: ^0.0.8
+ 
+  
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +36,9 @@ flutter:
     - assets/images/facebook.png
     - assets/images/google.png
     - assets/images/Ui_Ux.avif
+    - assets/images/Ui_ux.png
+    - assets/banner/find_your_team.jpg
+    - assets/banner/Start an online business.webp
+    - assets/banner/become_freelancer.jpg
+    - assets/banner/greenHouse.jpeg
+    - assets/banner/jobsearch.png

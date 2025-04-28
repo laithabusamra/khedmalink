@@ -8,8 +8,8 @@ import 'package:khedma_link/screens/Signup/comonents/or_divider.dart';
 import 'package:khedma_link/screens/Signup/comonents/social_icons.dart';
 import 'package:khedma_link/screens/login/login_screen.dart';
 
-class Body extends StatelessWidget {
-  const Body({super.key});
+class SignUpBody extends StatelessWidget {
+  const SignUpBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,20 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: size.height * 0.09),
             const Text(
               "SIGN UP",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(height: size.height * 0.3),
+            SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
               onChanged: (value) {},
+            ),
+            SizedBox(
+              height: size.height * 0.03,
             ),
             RoundedPasswordField(
               onChanged: (value) {},
@@ -44,7 +50,9 @@ class Body extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(height: size.height * 0.09),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             AlreadyHaveAnAccountCheck(
               login: false,
               press: () {
@@ -71,7 +79,7 @@ class Body extends StatelessWidget {
                   press: () {},
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

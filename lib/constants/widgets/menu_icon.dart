@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
 
 class MenuIcon extends StatelessWidget {
@@ -16,7 +17,7 @@ class MenuIcon extends StatelessWidget {
         IconButton(
           onPressed: onPressed,
           icon: Icon(
-            Icons.menu,
+            Iconsax.menu_14,
             color: iconColor,
           ),
         ),
@@ -26,12 +27,13 @@ class MenuIcon extends StatelessWidget {
             width: 18,
             height: 18,
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: TColors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
               child: Text(
-                "2",
+                '2',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!

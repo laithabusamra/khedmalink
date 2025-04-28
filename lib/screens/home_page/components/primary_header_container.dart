@@ -25,14 +25,16 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                 top: -150,
                 right: -250,
                 child: TCircularContainer(
-                  backgraoundColor: wPurble.withOpacity(0.1),
+                  // ignore: deprecated_member_use
+                  backgraoundColor: TColors.textWhite.withOpacity(0.1),
                 ),
               ),
               Positioned(
                 top: 100,
                 right: -300,
                 child: TCircularContainer(
-                  backgraoundColor: wPurble.withOpacity(0.1),
+                  // ignore: deprecated_member_use
+                  backgraoundColor: TColors.textWhite.withOpacity(0.1),
                 ),
               ),
               child,
