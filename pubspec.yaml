@@ -14,6 +14,7 @@ dependencies:
   get: ^4.6.5  # Properly indented and updated version
   cupertino_icons: ^1.0.8
   iconsax: ^0.0.8
+  readmore: ^3.0.0
  
   
 

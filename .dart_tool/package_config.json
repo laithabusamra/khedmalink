@@ -128,6 +128,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "readmore",
+      "rootUri": "file:///C:/Users/User-Admin/AppData/Local/Pub/Cache/hosted/pub.dev/readmore-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -194,7 +200,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-04-28T20:15:35.621093Z",
+  "generated": "2025-04-30T16:34:54.293642Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///C:/src/flutter",

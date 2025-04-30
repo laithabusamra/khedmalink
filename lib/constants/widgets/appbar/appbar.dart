@@ -28,14 +28,15 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 1,
-        centerTitle: true, // This centers the title
+        centerTitle: false,
         leading: showBackArrow
-            ? IconButton(onPressed: () {}, icon: const Icon(Iconsax.arrow_left))
+            ? IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Iconsax.arrow_left))
             : leadingIcon != null
                 ? IconButton(
                     onPressed: leadingOnPressed, icon: Icon(leadingIcon))
                 : null,
-
         title: title,
         actions: actions,
       ),
@@ -45,7 +46,6 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(TDeviceUtils.getAppBarHeight());
 }
-
 // Usage example where this AppBar would maintain the purple background
 // class TColorBar extends StatelessWidget {
 //   const TColorBar({super.key});

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
@@ -11,6 +12,7 @@ import 'package:khedma_link/constants/widgets/circular_icon.dart';
 import 'package:khedma_link/constants/widgets/rounded_container.dart';
 import 'package:khedma_link/screens/home_page/components/home_controller_file/brand_name.dart';
 import 'package:khedma_link/screens/home_page/components/rounded_image.dart';
+import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
 
 class JobCardVertical extends StatelessWidget {
   const JobCardVertical({super.key});
@@ -18,7 +20,7 @@ class JobCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProjectDetail()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),

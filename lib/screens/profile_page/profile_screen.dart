@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/constants/widgets/appbar/appbar.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';

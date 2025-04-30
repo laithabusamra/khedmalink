@@ -4,7 +4,6 @@ import 'package:khedma_link/constants/layouts/grid_layout.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/home_controller_file/job_card_vertical.dart';
-import 'package:khedma_link/screens/home_page/components/home_controller_file/promo_slider.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
 import 'package:khedma_link/screens/home_page/components/search_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';

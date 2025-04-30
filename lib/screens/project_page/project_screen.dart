@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/constants/layouts/grid_layout.dart';
@@ -31,7 +30,8 @@ class ProjectScreen extends StatelessWidget {
           child: Column(
             children: [
               GridLayout(
-                  itemCount: 4, iteamBuilder: (_, index) => JobCardVertical())
+                  itemCount: 4,
+                  iteamBuilder: (_, index) => const JobCardVertical())
             ],
           ),
         ),
