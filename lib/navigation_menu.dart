@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/screens/home_page/home_screen.dart';
+import 'package:khedma_link/screens/profile_page/settings.dart';
+import 'package:khedma_link/screens/project_page/project_screen.dart';
 import 'package:khedma_link/screens/search/search_page.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -44,11 +46,7 @@ class NavigationController extends GetxController {
   final screens = [
     const SearchPage(),
     const HomeScreen(),
-    Container(
-      color: Colors.lightGreenAccent,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
+    const ProjectScreen(),
+    const SettingsScreen(),
   ];
 }

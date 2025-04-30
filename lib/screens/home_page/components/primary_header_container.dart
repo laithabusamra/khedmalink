@@ -15,31 +15,27 @@ class TPrimaryHeaderContainer extends StatelessWidget {
     return TCurveWidgets(
       child: Container(
         color: wPurble,
-        padding: const EdgeInsets.only(bottom: 0),
-        child: SizedBox(
-          height: 400,
-          child: Stack(
-            children: [
-              /// Backgraound Custom Shape
-              Positioned(
-                top: -150,
-                right: -250,
-                child: TCircularContainer(
-                  // ignore: deprecated_member_use
-                  backgraoundColor: TColors.textWhite.withOpacity(0.1),
-                ),
+        // padding: const EdgeInsets.only(bottom: 0),
+        // child: SizedBox(
+        //   height: 400,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -150,
+              right: -250,
+              child: TCircularContainer(
+                backgraoundColor: TColors.textWhite.withOpacity(0.1),
               ),
-              Positioned(
-                top: 100,
-                right: -300,
-                child: TCircularContainer(
-                  // ignore: deprecated_member_use
-                  backgraoundColor: TColors.textWhite.withOpacity(0.1),
-                ),
+            ),
+            Positioned(
+              top: 100,
+              right: -300,
+              child: TCircularContainer(
+                backgraoundColor: TColors.textWhite.withOpacity(0.1),
               ),
-              child,
-            ],
-          ),
+            ),
+            child,
+          ],
         ),
       ),
     );

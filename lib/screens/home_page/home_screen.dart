@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   //
                   // Categories
+
                   Padding(
                     padding: EdgeInsets.only(
                       left: TSizes.defaultSpace,
@@ -49,7 +50,10 @@ class HomeScreen extends StatelessWidget {
                           height: TSizes.spaceBtwItems,
                         ),
                         // the categoris body
-                        HomeCategories()
+                        HomeCategories(),
+                        SizedBox(
+                          height: TSizes.spaceBtwSections,
+                        ),
                       ],
                     ),
                   ),
@@ -60,26 +64,26 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
-                  const PromoSlider(
-                    banners: [
-                      'assets/banner/become_freelancer.jpg',
-                      'assets/banner/Start an online business.webp',
-                      'assets/banner/find_your_team.jpg',
-                    ],
-                  ),
-                  const SizedBox(
-                    height: TSizes.spaceBtwItems,
-                  ),
+                  // const PromoSlider(
+                  //   banners: [
+                  //     'assets/banner/become_freelancer.jpg',
+                  //     'assets/banner/Start an online business.webp',
+                  //     'assets/banner/find_your_team.jpg',
+                  //   ],
+                  // ),
+                  // const SizedBox(
+                  //   height: TSizes.spaceBtwItems,
+                  // ),
                   //Heading
                   SectionHeading(
-                    title: 'Recommended',
+                    title: 'Working On',
                     onPressed: () {},
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
                   GridLayout(
-                    itemCount: 2,
+                    itemCount: 4,
                     iteamBuilder: (_, index) => const JobCardVertical(),
                   ),
                 ],
