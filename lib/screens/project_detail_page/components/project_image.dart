@@ -12,11 +12,11 @@ class ProjectImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TCurveWidgets(
       child: Container(
-        color: TColors.darkerGrey,
+        color: TColors.white,
         child: const Stack(
           children: [
             SizedBox(
-              height: 390,
+              height: 435,
               child: Padding(
                 padding: EdgeInsets.all(0.8),
                 child: Center(

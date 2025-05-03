@@ -9,10 +9,10 @@ class HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: 90,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 6,
+        itemCount: 7,
         scrollDirection: Axis.horizontal,
         itemBuilder: (_, index) {
           return VerticalImageText(

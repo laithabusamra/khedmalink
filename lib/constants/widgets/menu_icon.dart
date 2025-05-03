@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
+import 'package:khedma_link/screens/notification_page/notification_screen.dart';
 
 class MenuIcon extends StatelessWidget {
   const MenuIcon({
     super.key,
     required this.onPressed,
-    required this.iconColor,
+    this.iconColor,
+    this.counterTextColor,
   });
   final VoidCallback onPressed;
-  final Color iconColor;
+  final Color? iconColor, counterTextColor;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         IconButton(
-          onPressed: onPressed,
+          onPressed: () => Get.to(() => const NotificationScreen()),
           icon: Icon(
-            Iconsax.menu_14,
+            Iconsax.notification,
             color: iconColor,
           ),
         ),

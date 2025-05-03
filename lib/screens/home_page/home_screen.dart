@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         //heading
                         SectionHeading(
-                          title: 'Pending Activites',
+                          title: 'Active Projects',
                           showActionButton: false,
                           textColor: Colors.white,
                         ),

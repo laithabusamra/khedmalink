@@ -26,7 +26,7 @@ class ToDo {
       ),
       ToDo(
         id: '06',
-        todoText: 'Dinner with Jenny',
+        todoText: 'Dinner with sam',
       ),
     ];
   }

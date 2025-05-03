@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/instance_manager.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/constants/widgets/project_meta_data.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 import 'package:khedma_link/screens/project_detail_page/components/project_image.dart';
+import 'package:khedma_link/screens/project_detail_page/components/project_reviews.dart';
 import 'package:khedma_link/screens/project_detail_page/components/rating_share.dart';
 import 'package:readmore/readmore.dart';
 
@@ -76,7 +79,8 @@ class ProjectDetail extends StatelessWidget {
                         showActionButton: false,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Get.to(() => const ProjectReviewsScreen()),
                         icon: const Icon(Iconsax.arrow_right_3, size: 20),
                       )
                     ],
