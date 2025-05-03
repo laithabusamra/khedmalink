@@ -2,11 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/widgets/rounded_button.dart';
 import 'package:khedma_link/navigation_menu.dart';
-import 'package:khedma_link/screens/recruite_page/recruiter_home_screen.dart';
+import 'package:khedma_link/screens/recruite_page/recruiter_navigation_menu.dart';
 import 'package:khedma_link/screens/welcome/components/background.dart';
 
 class ScreenBody extends StatelessWidget {
   const ScreenBody({super.key});
+
+  void _handleUserSelection(BuildContext context, bool isRecruiter) {
+    if (isRecruiter) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const RecruiterNavigationMenu(),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const NavigationMenu(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +46,14 @@ class ScreenBody extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.05),
             RoundedButton(
-                text: "Freelancer",
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const NavigationMenu();
-                      },
-                    ),
-                  );
-                }),
+              text: "Freelancer",
+              press: () => _handleUserSelection(context, false),
+            ),
             RoundedButton(
               text: "Recruiter",
               color: secondeButtounColor2,
               textColor: Colors.white,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const RecruiterHomeScreen();
-                    },
-                  ),
-                );
-              },
+              press: () => _handleUserSelection(context, true),
             ),
           ],
         ),
