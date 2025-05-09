@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/screens/home.dart';
-import 'package:khedma_link/screens/home_page/home_screen.dart';
 import 'package:khedma_link/screens/profile_page/settings.dart';
-import 'package:khedma_link/screens/project_page/project_screen.dart';
-import 'package:khedma_link/screens/search/search_page.dart';
+import 'package:khedma_link/screens/recruite_page/add_projects/add_projects_screen.dart';
+import 'package:khedma_link/screens/recruite_page/recruiter_home_screen.dart';
 
 class RecruiterNavigationMenu extends StatelessWidget {
   const RecruiterNavigationMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController());
+    final controller = Get.put(NavigationControllerrecruiter());
 
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -44,13 +42,13 @@ class RecruiterNavigationMenu extends StatelessWidget {
   }
 }
 
-class NavigationController extends GetxController {
+class NavigationControllerrecruiter extends GetxController {
   final Rx<int> selectedIndex = 2.obs;
 
   final screens = [
     const TodoHomeScreen(),
-    const ProjectScreen(),
-    const HomeScreen(),
+    const AddProjectsScreen(),
+    const RecruiterHomeScreen(),
     const SettingsScreen(),
   ];
 }

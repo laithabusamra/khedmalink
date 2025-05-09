@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
-import 'package:khedma_link/constants/widgets/appbar/appbar.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 import 'package:khedma_link/screens/profile_page/components/profile_menu.dart';
 import 'package:khedma_link/screens/search/components/circular_image.dart';
@@ -11,9 +11,16 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TAppBar(
-        showBackArrow: true,
-        title: Text('Profile'),
+      appBar: AppBar(
+        backgroundColor: TColors.white,
+        surfaceTintColor: Colors.transparent,
+        title: Text(
+          'Profile',
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(color: Colors.black),
+        ),
       ),
       //the body
 
@@ -80,8 +87,13 @@ class ProfileScreen extends StatelessWidget {
                 onPressed: () {},
               ),
               ProfileMenu(
-                title: 'Gender',
-                value: 'Male',
+                title: 'portfolio link',
+                value: 'https://laith-portfolio4.web.app/',
+                onPressed: () {},
+              ),
+              ProfileMenu(
+                title: 'Job Title',
+                value: 'Software Engineer',
                 onPressed: () {},
               ),
               const Divider(),

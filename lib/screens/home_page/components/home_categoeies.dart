@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/screens/home.dart';
 import 'package:khedma_link/screens/home_page/components/vertical_image.dart';
 
 class HomeCategories extends StatelessWidget {
-  const HomeCategories({
-    super.key,
-  });
+  const HomeCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,12 @@ class HomeCategories extends StatelessWidget {
           return VerticalImageText(
             image: 'assets/images/Ui_ux.png',
             title: "UI/UX designer",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TodoHomeScreen()),
+              );
+            },
           );
         },
       ),
