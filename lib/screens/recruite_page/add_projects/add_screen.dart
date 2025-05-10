@@ -129,7 +129,7 @@ class _AddScreenState extends State<AddScreen> {
         'title': _titleController.text,
         'description': _descriptionController.text,
         'price': '\$${_priceController.text} per hour',
-        'completed': false,
+        'completed': true,
       };
 
       Get.back(result: newProject);

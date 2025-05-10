@@ -23,7 +23,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
       'title': 'Website Redesign',
       'description': 'Modern redesign for corporate website',
       'price': '\$60 per hour',
-      'completed': false,
+      'completed': true,
     },
     {
       'title': 'Logo Design',
@@ -35,7 +35,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
       'title': 'SEO Optimization',
       'description': 'Improve search rankings for existing site',
       'price': '\$55 per hour',
-      'completed': false,
+      'completed': true,
     },
   ];
 

@@ -4,20 +4,36 @@ import '../../constants/widgets/todo_item.dart';
 import '../../constants/colors.dart';
 
 class TodoHomeScreen extends StatefulWidget {
-  const TodoHomeScreen({super.key});
+  final String projectId;
+  final String projectTitle;
+
+  const TodoHomeScreen({
+    super.key,
+    required this.projectId,
+    required this.projectTitle,
+  });
 
   @override
   State<TodoHomeScreen> createState() => _HomeState();
 }
 
 class _HomeState extends State<TodoHomeScreen> {
-  final todosList = ToDo.todoList();
-  List<ToDo> _foundToDo = [];
+  // Simulated per-project to-do storage
+  static final Map<String, List<ToDo>> _projectTodos = {
+    '0': ToDo.todoList(),
+    '1': [],
+    '2': [],
+    '3': [],
+  };
+
+  late List<ToDo> todosList;
+  late List<ToDo> _foundToDo;
   final _todoController = TextEditingController();
 
   @override
   void initState() {
-    _foundToDo = todosList;
+    todosList = _projectTodos[widget.projectId] ?? [];
+    _foundToDo = List.from(todosList);
     super.initState();
   }
 
@@ -29,10 +45,7 @@ class _HomeState extends State<TodoHomeScreen> {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Column(
               children: [
                 searchBox(),
@@ -40,25 +53,21 @@ class _HomeState extends State<TodoHomeScreen> {
                   child: ListView(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(
-                          top: 50,
-                          bottom: 20,
-                        ),
-                        child: const Text(
-                          'UI/UX project ToDos',
-                          style: TextStyle(
+                        margin: const EdgeInsets.only(top: 50, bottom: 20),
+                        child: Text(
+                          '${widget.projectTitle} ToDos',
+                          style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
-                      for (ToDo todoo in _foundToDo.reversed)
+                      for (ToDo todo in _foundToDo.reversed)
                         ToDoItem(
-                          todo: todoo,
+                          todo: todo,
                           onToDoChanged: _handleToDoChange,
                           onDeleteItem: _deleteToDoItem,
                         ),
-                      _buildInputRow(),
                     ],
                   ),
                 ),
@@ -71,15 +80,10 @@ class _HomeState extends State<TodoHomeScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 20,
-                      right: 20,
-                      left: 20,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 5,
-                    ),
+                    margin:
+                        const EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: const [
@@ -95,16 +99,14 @@ class _HomeState extends State<TodoHomeScreen> {
                     child: TextField(
                       controller: _todoController,
                       decoration: const InputDecoration(
-                          hintText: 'Add a new todo item',
-                          border: InputBorder.none),
+                        hintText: 'Add a new todo item',
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 20,
-                    right: 20,
-                  ),
+                  margin: const EdgeInsets.only(bottom: 20, right: 20),
                   child: ElevatedButton(
                     onPressed: () {
                       _addToDoItem(_todoController.text);
@@ -115,9 +117,7 @@ class _HomeState extends State<TodoHomeScreen> {
                     ),
                     child: const Text(
                       '+',
-                      style: TextStyle(
-                        fontSize: 40,
-                      ),
+                      style: TextStyle(fontSize: 40),
                     ),
                   ),
                 ),
@@ -138,15 +138,22 @@ class _HomeState extends State<TodoHomeScreen> {
   void _deleteToDoItem(String id) {
     setState(() {
       todosList.removeWhere((item) => item.id == id);
+      _projectTodos[widget.projectId] = todosList;
+      _foundToDo = List.from(todosList);
     });
   }
 
   void _addToDoItem(String toDo) {
+    if (toDo.trim().isEmpty) return;
+
     setState(() {
-      todosList.add(ToDo(
+      final newToDo = ToDo(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         todoText: toDo,
-      ));
+      );
+      todosList.add(newToDo);
+      _projectTodos[widget.projectId] = todosList;
+      _foundToDo = List.from(todosList);
     });
     _todoController.clear();
   }
@@ -200,7 +207,7 @@ class _HomeState extends State<TodoHomeScreen> {
     return AppBar(
       backgroundColor: tdBGColor,
       elevation: 0,
-      title: const Text(''), // Empty title
+      title: const Text(''),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
@@ -214,33 +221,6 @@ class _HomeState extends State<TodoHomeScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildInputRow() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: [
-          // Text Field
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0.0, 0.0),
-                    blurRadius: 10.0,
-                    spreadRadius: 0.0,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
-import 'package:khedma_link/screens/home.dart';
 import 'package:khedma_link/screens/profile_page/settings.dart';
 import 'package:khedma_link/screens/recruite_page/add_projects/add_projects_screen.dart';
+import 'package:khedma_link/screens/recruite_page/my_projects/my_projects_screen.dart';
 import 'package:khedma_link/screens/recruite_page/recruiter_home_screen.dart';
 
 class RecruiterNavigationMenu extends StatelessWidget {
@@ -46,7 +46,7 @@ class NavigationControllerrecruiter extends GetxController {
   final Rx<int> selectedIndex = 2.obs;
 
   final screens = [
-    const TodoHomeScreen(),
+    const MyProjectsScreen(),
     const AddProjectsScreen(),
     const RecruiterHomeScreen(),
     const SettingsScreen(),

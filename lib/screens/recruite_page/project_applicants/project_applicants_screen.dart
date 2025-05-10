@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/screens/welcome/freelancer_recruiter/freelancer_profile_screen.dart';
 
 class ProjectApplicantsScreen extends StatefulWidget {
   final String projectId;
@@ -53,19 +54,38 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(child: Text(applicant['name'][0])),
+                      CircleAvatar(
+                        child: Text(applicant['name'][0]),
+                      ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              applicant['name'],
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(applicant['role']),
-                          ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => FreelancerProfileScreen(
+                                  name: applicant['name'],
+                                  role: applicant['role'],
+                                  offeredPrice: applicant['offeredPrice'],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                applicant['name'],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              Text(applicant['role']),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -84,8 +104,10 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                           widget.onReject(index);
                           setState(() => _applicants.removeAt(index));
                         },
-                        child: const Text('Reject',
-                            style: TextStyle(color: Colors.red)),
+                        child: const Text(
+                          'Reject',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(

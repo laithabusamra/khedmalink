@@ -6,6 +6,7 @@ import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/constants/widgets/appbar/appbar.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
+import 'package:khedma_link/screens/profile_page/components/add_portfolio_screen.dart';
 import 'package:khedma_link/screens/profile_page/components/settings_menu.dart';
 import 'package:khedma_link/screens/profile_page/components/user_profile_title.dart';
 import 'package:khedma_link/screens/profile_page/profile_screen.dart';
@@ -56,16 +57,20 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwItems,
                   ),
+
                   SettingsMenu(
-                      icon: Iconsax.briefcase,
-                      title: 'Job Title',
-                      subTitle: "Set your job title",
-                      onTap: () {}),
-                  SettingsMenu(
-                      icon: Iconsax.card_receive,
-                      title: 'Portfolio Link',
-                      subTitle: "Set your portfolio",
-                      onTap: () {}),
+                    icon: Iconsax.card_receive,
+                    title: 'Portfolio Link',
+                    subTitle: "Set your portfolio",
+                    onTap: () async {
+                      final portfolioLink =
+                          await Get.to(() => const AddPortfolioScreen());
+                      if (portfolioLink != null) {
+                        print('New portfolio: $portfolioLink');
+                      }
+                    },
+                  ),
+
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
