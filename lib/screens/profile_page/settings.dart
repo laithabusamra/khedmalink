@@ -66,7 +66,9 @@ class SettingsScreen extends StatelessWidget {
                       final portfolioLink =
                           await Get.to(() => const AddPortfolioScreen());
                       if (portfolioLink != null) {
-                        print('New portfolio: $portfolioLink');
+                        debugPrint('New portfolio: $portfolioLink');
+                        // Alternatively, you could use a proper logging package like:
+                        // logger.d('New portfolio: $portfolioLink');
                       }
                     },
                   ),

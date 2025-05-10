@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
 import 'package:khedma_link/screens/recruite_page/add_projects/add_screen.dart';
 
@@ -94,6 +93,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
+                    // ignore: deprecated_member_use
                     color: Colors.grey.withOpacity(0.1),
                     blurRadius: 5,
                     offset: const Offset(0, 2),
