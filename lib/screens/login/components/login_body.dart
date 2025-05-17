@@ -55,7 +55,8 @@ class LoginBody extends StatelessWidget {
                   ),
                 );
               },
-              color: secondeButtounColor2,
+              // ignore: deprecated_member_use
+              color: buttounColor.withOpacity(0.83),
             ),
             SizedBox(
               height: size.height * 0.03,

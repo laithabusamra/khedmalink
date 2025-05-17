@@ -25,7 +25,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TSizes.md),
       child: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         elevation: 1,
         centerTitle: false,
@@ -46,15 +46,3 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(TDeviceUtils.getAppBarHeight());
 }
-// Usage example where this AppBar would maintain the purple background
-// class TColorBar extends StatelessWidget {
-//   const TColorBar({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: buttounColor,
-//       height: TSizes.spaceBtwItems,
-//     );
-//   }
-// }

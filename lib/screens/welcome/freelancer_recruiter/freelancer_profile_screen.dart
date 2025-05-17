@@ -6,18 +6,40 @@ import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 import 'package:khedma_link/screens/project_detail_page/components/project_reviews.dart';
 import 'package:readmore/readmore.dart';
 import 'package:khedma_link/constants/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FreelancerProfileScreen extends StatelessWidget {
   final String name;
   final String role;
   final String offeredPrice;
+  final String phoneNumber;
+  final String portfolioUrl;
 
   const FreelancerProfileScreen({
     super.key,
     required this.name,
     required this.role,
     required this.offeredPrice,
+    required this.phoneNumber,
+    required this.portfolioUrl,
   });
+
+  Future<void> _launchWhatsApp() async {
+    final url = "https://wa.me/$phoneNumber";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _launchPortfolio() async {
+    if (await canLaunchUrl(Uri.parse(portfolioUrl))) {
+      await launchUrl(Uri.parse(portfolioUrl));
+    } else {
+      throw 'Could not launch $portfolioUrl';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,16 +114,56 @@ class FreelancerProfileScreen extends StatelessWidget {
                           .titleMedium
                           ?.copyWith(color: TColors.primary)),
 
+                  const SizedBox(height: TSizes.spaceBtwItems),
+
+                  // Contact Information
+                  Row(
+                    children: [
+                      const Icon(Icons.phone, size: 18),
+                      const SizedBox(width: 8),
+                      Text(phoneNumber,
+                          style: Theme.of(context).textTheme.bodyMedium),
+                    ],
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+                  GestureDetector(
+                    onTap: _launchPortfolio,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.link, size: 18),
+                        const SizedBox(width: 8),
+                        Text(
+                          portfolioUrl,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-                  // Send Message Button
+                  // WhatsApp Button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Handle message action
-                      },
-                      child: const Text("Send Message"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color(0xFF25D366), // WhatsApp green
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: _launchWhatsApp,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Iconsax.message, size: 20),
+                          SizedBox(width: 8),
+                          Text("Contact via WhatsApp"),
+                        ],
+                      ),
                     ),
                   ),
 

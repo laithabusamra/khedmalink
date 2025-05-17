@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/list_of_projects.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 
@@ -8,6 +9,13 @@ class CategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Sample freelancer data
+    const sampleFreelancer = Freelancer(
+      name: "Alex Johnson",
+      role: "UI/UX Designer",
+      offeredPrice: "\$65/hour",
+    );
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
@@ -24,14 +32,22 @@ class CategoryTab extends StatelessWidget {
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 2,
+              itemCount: 2, // Number of project items to display
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
+                crossAxisCount: 1, // Single column layout
                 mainAxisSpacing: TSizes.spaceBtwItems,
                 crossAxisSpacing: TSizes.spaceBtwItems,
-                childAspectRatio: 0.75, // adjust this ratio as needed
+                childAspectRatio: 0.75, // Adjust based on your design needs
               ),
-              itemBuilder: (context, index) => const ListOfProject(),
+              itemBuilder: (context, index) => ListOfProject(
+                freelancer: sampleFreelancer, // Pass the Freelancer object
+                projectData: {
+                  // Sample project data
+                  'title': 'Project ${index + 1}',
+                  'description': 'Project description goes here',
+                  'status': index % 2 == 0 ? 'Active' : 'Pending',
+                },
+              ),
             ),
           ],
         ),

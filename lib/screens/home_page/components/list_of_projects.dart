@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
 
 class ListOfProject extends StatelessWidget {
+  final Freelancer freelancer;
+  final Map<String, String> projectData;
+
   const ListOfProject({
     super.key,
+    required this.freelancer,
+    required this.projectData,
   });
 
   @override

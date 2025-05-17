@@ -1,16 +1,40 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.khedma_link.app-mergeDebugResources-24:/values-de/values-de.xml",
+            "outputFile": "com.example.khedma_link.app-mergeDebugResources-25:/values-de/values-de.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\User-Admin\\.gradle\\caches\\transforms-3\\6f9a65baaf12c9cf4e60f5516557d16b\\transformed\\core-1.13.1\\res\\values-de\\values-de.xml",
+                    "source": "C:\\Users\\User-Admin\\.gradle\\caches\\transforms-3\\7058b12657db63b7c48ec5fc7fa4ff52\\transformed\\core-1.13.1\\res\\values-de\\values-de.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
                         "startOffsets": "55,153,255,355,455,563,668,786",
                         "endColumns": "97,101,99,99,107,104,117,100",
                         "endOffsets": "148,250,350,450,558,663,781,882"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,13",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,355,455,563,668,1202",
+                        "endColumns": "97,101,99,99,107,104,117,100",
+                        "endOffsets": "148,250,350,450,558,663,781,1298"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\User-Admin\\.gradle\\caches\\transforms-3\\dba2ec269c328196d29c500826cc79c4\\transformed\\browser-1.8.0\\res\\values-de\\values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,159,260,371",
+                        "endColumns": "103,100,110,99",
+                        "endOffsets": "154,255,366,466"
+                    },
+                    "to": {
+                        "startLines": "9,10,11,12",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "786,890,991,1102",
+                        "endColumns": "103,100,110,99",
+                        "endOffsets": "885,986,1097,1197"
                     }
                 }
             ]

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
@@ -24,7 +25,7 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
       'price': '\$70/hour',
       'applicants': [
         {
-          'name': 'sami ',
+          'name': 'sami',
           'role': 'Flutter Developer',
           'offeredPrice': '\$65/hour',
         },
@@ -93,7 +94,13 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
                           textColor: Colors.white,
                         ),
                         SizedBox(height: TSizes.spaceBtwItems),
-                        HomeCategories(),
+                        // You can replace this with a proper list of active projects if you want
+                        HomeCategories(
+                          freelancer: Freelancer(
+                              name: "laith",
+                              role: 'graphic',
+                              offeredPrice: "\$90"),
+                        ),
                         SizedBox(height: TSizes.spaceBtwSections),
                       ],
                     ),
@@ -104,10 +111,10 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
             Padding(
               padding: const EdgeInsets.all(TSizes.spaceBtwItems),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SectionHeading(
-                    title: 'Pending projects',
-                    onPressed: () {},
+                    title: 'Pending Projects',
                     showActionButton: false,
                   ),
                   ListView.separated(
@@ -162,6 +169,11 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
                                     setState(() {
                                       pendingProjects[index]['applicants']
                                           .removeAt(applicantIndex);
+
+                                      if (pendingProjects[index]['applicants']
+                                          .isEmpty) {
+                                        pendingProjects.removeAt(index);
+                                      }
                                     });
                                   },
                                 ),

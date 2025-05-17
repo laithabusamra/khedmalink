@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/list_of_projects.dart';
@@ -12,11 +13,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    const freelancer = Freelancer(
+        name: "Jack", role: "Flutter Developer", offeredPrice: "\$70/hour");
+
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const TPrimaryHeaderContainer(
+            TPrimaryHeaderContainer(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -33,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                           textColor: Colors.white,
                         ),
                         SizedBox(height: TSizes.spaceBtwItems),
-                        HomeCategories(),
+                        HomeCategories(freelancer: freelancer),
                         SizedBox(height: TSizes.spaceBtwSections),
                       ],
                     ),
@@ -42,15 +46,18 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding: EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
                   SectionHeading(
                     title: 'Pending projects',
-                    onPressed: () {},
+                    onPressed: null,
                     showActionButton: false,
                   ),
-                  const ListOfProject(),
+                  ListOfProject(
+                    freelancer: freelancer,
+                    projectData: {},
+                  ),
                 ],
               ),
             ),

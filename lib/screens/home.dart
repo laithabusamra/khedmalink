@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
+import 'package:khedma_link/screens/welcome/freelancer_recruiter/freelancer_profile_screen.dart';
 import '../../model/todo.dart';
 import '../../constants/widgets/todo_item.dart';
 import '../../constants/colors.dart';
@@ -6,11 +8,13 @@ import '../../constants/colors.dart';
 class TodoHomeScreen extends StatefulWidget {
   final String projectId;
   final String projectTitle;
+  final Freelancer freelancer;
 
   const TodoHomeScreen({
     super.key,
     required this.projectId,
     required this.projectTitle,
+    required this.freelancer,
   });
 
   @override
@@ -112,12 +116,13 @@ class _HomeState extends State<TodoHomeScreen> {
                       _addToDoItem(_todoController.text);
                     },
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: TColors.primary, // Use your theme color
                       minimumSize: const Size(60, 60),
                       elevation: 10,
                     ),
                     child: const Text(
                       '+',
-                      style: TextStyle(fontSize: 40),
+                      style: TextStyle(fontSize: 40, color: Colors.white),
                     ),
                   ),
                 ),
@@ -211,12 +216,29 @@ class _HomeState extends State<TodoHomeScreen> {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              'assets/images/avatar.jpg',
-              width: 40,
-              height: 40,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FreelancerProfileScreen(
+                    name: 'kareem',
+                    offeredPrice: "\$60",
+                    role: "lowayer",
+                    phoneNumber: '0797905921',
+                    portfolioUrl: "https://exampleportfolio.com",
+                  ),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                'assets/images/avatar.jpg',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

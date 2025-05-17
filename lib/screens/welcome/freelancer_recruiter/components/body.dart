@@ -51,7 +51,8 @@ class ScreenBody extends StatelessWidget {
             ),
             RoundedButton(
               text: "Recruiter",
-              color: secondeButtounColor2,
+              // ignore: deprecated_member_use
+              color: buttounColor.withOpacity(0.83),
               textColor: Colors.white,
               press: () => _handleUserSelection(context, true),
             ),
