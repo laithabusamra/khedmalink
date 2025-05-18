@@ -5,44 +5,49 @@ import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 class SearchContainer extends StatelessWidget {
   const SearchContainer({
     super.key,
-    required this.text,
+    required this.controller,
     this.icon = Icons.search,
     this.showBackground = true,
     this.showBorder = true,
-    this.onTap,
+    this.onChanged,
     this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
   });
 
-  final String text;
+  final TextEditingController controller;
   final IconData? icon;
   final bool showBackground, showBorder;
-  final VoidCallback? onTap;
+  final ValueChanged<String>? onChanged;
   final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: padding,
-        child: Container(
-          width: TDeviceUtils.getScreenWidth(context),
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: showBackground ? TColors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(16.0),
-            border: showBorder ? Border.all(color: TColors.grey) : null,
-          ),
-          child: Row(
-            children: [
-              Icon(icon, color: TColors.darkerGrey),
-              const SizedBox(width: TSizes.spaceBtwItems),
-              Text(
-                text,
+    return Padding(
+      padding: padding,
+      child: Container(
+        width: TDeviceUtils.getScreenWidth(context),
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: showBackground ? TColors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(16.0),
+          border: showBorder ? Border.all(color: TColors.grey) : null,
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: TColors.darkerGrey),
+            const SizedBox(width: TSizes.spaceBtwItems),
+            Expanded(
+              child: TextField(
+                controller: controller,
+                onChanged: onChanged,
+                decoration: InputDecoration(
+                  hintText: 'Search for service',
+                  border: InputBorder.none,
+                  hintStyle: Theme.of(context).textTheme.bodySmall,
+                ),
                 style: Theme.of(context).textTheme.bodySmall,
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );

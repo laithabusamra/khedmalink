@@ -83,7 +83,6 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
                 children: [
                   HomeTAppBar(),
                   SizedBox(height: TSizes.spaceBtwSections),
-                  SearchContainer(text: "Search for service"),
                   Padding(
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
@@ -94,7 +93,6 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
                           textColor: Colors.white,
                         ),
                         SizedBox(height: TSizes.spaceBtwItems),
-                        // You can replace this with a proper list of active projects if you want
                         HomeCategories(
                           freelancer: Freelancer(
                               name: "laith",
@@ -113,7 +111,7 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SectionHeading(
+                  const SectionHeading(
                     title: 'Pending Projects',
                     showActionButton: false,
                   ),

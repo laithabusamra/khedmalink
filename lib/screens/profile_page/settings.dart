@@ -26,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   //appbar
                   TAppBar(
+                    showBackArrow: false,
                     title: Text(
                       "Account",
                       style: Theme.of(context).textTheme.headlineMedium!.apply(
@@ -67,8 +68,6 @@ class SettingsScreen extends StatelessWidget {
                           await Get.to(() => const AddPortfolioScreen());
                       if (portfolioLink != null) {
                         debugPrint('New portfolio: $portfolioLink');
-                        // Alternatively, you could use a proper logging package like:
-                        // logger.d('New portfolio: $portfolioLink');
                       }
                     },
                   ),

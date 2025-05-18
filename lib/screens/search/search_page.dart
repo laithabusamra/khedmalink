@@ -10,8 +10,50 @@ import 'package:khedma_link/screens/search/components/brand_name.dart';
 import 'package:khedma_link/screens/search/components/categorytab.dart';
 import 'package:khedma_link/screens/search/components/filter_sheet.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
+
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+  final List<String> _allServices = [
+    'Web Development',
+    'Mobile App Development',
+    'UI/UX Design',
+    'Graphic Design',
+    'Video Editing',
+    'Content Writing',
+    'Translation Services',
+    'Digital Marketing'
+  ];
+  List<String> _filteredServices = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredServices = _allServices;
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      _searchQuery = _searchController.text.toLowerCase();
+      _filteredServices = _allServices.where((service) {
+        return service.toLowerCase().contains(_searchQuery);
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +94,13 @@ class SearchPage extends StatelessWidget {
                         const SizedBox(height: TSizes.spaceBtwItems),
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: SearchContainer(
-                                text: 'Search for service',
+                                controller: _searchController,
                                 showBorder: true,
                                 showBackground: false,
                                 padding: EdgeInsets.zero,
+                                onChanged: (value) => _onSearchChanged(),
                               ),
                             ),
                             const SizedBox(width: 10),
@@ -81,17 +124,18 @@ class SearchPage extends StatelessWidget {
                         ),
                         const SizedBox(height: TSizes.spaceBtwSections),
                         SectionHeading(
-                          title: 'Featured sevices',
+                          title: 'Featured services',
                           onPressed: () {},
                           showActionButton: false,
                         ),
                         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
                         GridLayout(
-                          itemCount: 4,
+                          itemCount: _filteredServices.length,
                           mainAxisExtent: 80,
                           iteamBuilder: (_, index) {
-                            return const BrandCart(
+                            return BrandCart(
                               showBorder: false,
+                              title: _filteredServices[index],
                             );
                           },
                         )
@@ -110,12 +154,12 @@ class SearchPage extends StatelessWidget {
               ),
             ];
           },
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
+              CategoryTab(searchQuery: _searchQuery),
+              CategoryTab(searchQuery: _searchQuery),
+              CategoryTab(searchQuery: _searchQuery),
+              CategoryTab(searchQuery: _searchQuery),
             ],
           ),
         ),

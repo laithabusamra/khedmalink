@@ -25,9 +25,10 @@ class LoginBody extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: size.height * 0.09),
             const Text(
-              "Login",
+              "LOGIN",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontSize: 24,
               ),
             ),
             SizedBox(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/constants/helper_class/enums.dart';
@@ -7,13 +8,11 @@ import 'package:khedma_link/screens/home_page/components/home_controller_file/br
 import 'package:khedma_link/screens/search/components/circular_image.dart';
 
 class BrandCart extends StatelessWidget {
-  const BrandCart({
-    super.key,
-    required this.showBorder,
-    this.onTap,
-  });
+  const BrandCart(
+      {super.key, required this.showBorder, this.onTap, required this.title});
   final bool showBorder;
   final void Function()? onTap;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -47,6 +46,12 @@ class BrandCart extends StatelessWidget {
                     "20 offers with recommendation",
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   )
                 ],
               ),

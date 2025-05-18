@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
-import 'package:khedma_link/screens/profile_page/settings.dart';
 import 'package:khedma_link/screens/recruite_page/add_projects/add_projects_screen.dart';
 import 'package:khedma_link/screens/recruite_page/my_projects/my_projects_screen.dart';
 import 'package:khedma_link/screens/recruite_page/recruiter_home_screen.dart';
+import 'package:khedma_link/screens/recruite_page/recruiter_profile_page/recruiter_settings.dart';
 
 class RecruiterNavigationMenu extends StatelessWidget {
   const RecruiterNavigationMenu({super.key});
@@ -49,6 +49,6 @@ class NavigationControllerrecruiter extends GetxController {
     const MyProjectsScreen(),
     const AddProjectsScreen(),
     const RecruiterHomeScreen(),
-    const SettingsScreen(),
+    const RecruiterSettings(),
   ];
 }

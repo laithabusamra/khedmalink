@@ -21,6 +21,7 @@ class BrandShoeCase extends StatelessWidget {
       childe: Column(
         children: [
           BrandCart(
+            title: "",
             showBorder: false,
           ),
           SizedBox(

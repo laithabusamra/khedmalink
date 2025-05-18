@@ -24,6 +24,7 @@ class SignUpBody extends StatelessWidget {
               "SIGN UP",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontSize: 24,
               ),
             ),
             SizedBox(height: size.height * 0.03),

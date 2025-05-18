@@ -23,7 +23,6 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       //the body
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
@@ -100,14 +99,6 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              Center(
-                child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Close Account',
-                      style: TextStyle(color: Colors.red),
-                    )),
-              )
             ],
           ),
         ),

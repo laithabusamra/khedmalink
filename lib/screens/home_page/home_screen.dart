@@ -5,7 +5,6 @@ import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/list_of_projects.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
-import 'package:khedma_link/screens/home_page/components/search_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +25,6 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   HomeTAppBar(),
                   SizedBox(height: TSizes.spaceBtwSections),
-                  SearchContainer(text: "Search for service"),
                   Padding(
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
