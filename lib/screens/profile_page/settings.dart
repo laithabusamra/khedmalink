@@ -26,7 +26,6 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   //appbar
                   TAppBar(
-                    showBackArrow: false,
                     title: Text(
                       "Account",
                       style: Theme.of(context).textTheme.headlineMedium!.apply(

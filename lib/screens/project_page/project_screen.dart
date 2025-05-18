@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/widgets/menu_icon.dart';
-import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
+import 'package:khedma_link/screens/todo_home.dart';
 
 class ProjectScreen extends StatelessWidget {
   const ProjectScreen({super.key});
@@ -14,7 +15,7 @@ class ProjectScreen extends StatelessWidget {
         'title': 'Mobile App Development',
         'description': 'Build a Flutter e-commerce app with Firebase backend',
         'price': '\$70 per hour',
-        'completed': true,
+        'completed': false,
       },
       {
         'title': 'Website Redesign',
@@ -32,7 +33,7 @@ class ProjectScreen extends StatelessWidget {
         'title': 'SEO Optimization',
         'description': 'Improve search rankings for existing site',
         'price': '\$55 per hour',
-        'completed': false,
+        'completed': true,
       },
     ];
 
@@ -40,11 +41,14 @@ class ProjectScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: TColors.white,
         surfaceTintColor: Colors.transparent,
-        title: Text("Projects",
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium
-                ?.copyWith(color: Colors.black)),
+        elevation: 0,
+        title: Text(
+          "Projects",
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
         actions: [
           MenuIcon(
             onPressed: () {},
@@ -56,89 +60,90 @@ class ProjectScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
           itemCount: projects.length,
           separatorBuilder: (context, index) => const SizedBox(height: 16),
-          itemBuilder: (context, index) => GestureDetector(
-            onTap: () {
-              // Safe price parsing
-              final priceString = projects[index]['price'] as String;
-              final numericString =
-                  priceString.replaceAll(RegExp(r'[^0-9.]'), '');
-              final priceValue = double.tryParse(numericString) ?? 0.0;
+          itemBuilder: (context, index) {
+            final project = projects[index];
+            final isCompleted = project['completed'] as bool;
 
-              Get.to(() => ProjectDetail(
-                    description: projects[index]['description'] as String,
-                    projectId: index.toString(),
-                    suggestedPrice: priceValue,
-                    title: projects[index]['title'] as String,
-                    completed: projects[index]['completed'] as bool,
-                  ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    // ignore: deprecated_member_use
-                    color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 5,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  // Status indicator circle
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: projects[index]['completed'] as bool
-                          ? Colors.green
-                          : Colors.red,
+            return GestureDetector(
+              onTap: isCompleted
+                  ? null
+                  : () {
+                      Get.to(() => TodoHomeScreen(
+                            projectId: index.toString(),
+                            projectTitle: project['title'] as String,
+                            freelancer: const Freelancer(
+                                name: "sami",
+                                offeredPrice: "70",
+                                role: "developer"),
+                          ));
+                    },
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      // ignore: deprecated_member_use
+                      color: Colors.grey.withOpacity(0.15),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              projects[index]['title'] as String,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const Spacer(),
-                            Text(
-                              projects[index]['price'] as String,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          projects[index]['description'] as String,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
+                  ],
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.timelapse,
+                      color: isCompleted ? Colors.green : Colors.orange,
+                      size: 20,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  project['title'] as String,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Text(
+                                project['price'] as String,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                      color: TColors.primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            project['description'] as String,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

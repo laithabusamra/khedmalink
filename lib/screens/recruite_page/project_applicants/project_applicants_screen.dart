@@ -58,6 +58,7 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.projectTitle),
+        backgroundColor: Colors.white,
       ),
       body: _applicants.isEmpty
           ? const Center(child: Text('No applicants left.'))
@@ -145,7 +146,7 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                                 if (confirm == true) {
                                   widget.onAccept(applicant);
                                   setState(() => _applicants.removeAt(index));
-                                  // Optional: Pop the screen after accept (project moved to active)
+                                  // ignore: use_build_context_synchronously
                                   Navigator.pop(context);
                                 }
                               },

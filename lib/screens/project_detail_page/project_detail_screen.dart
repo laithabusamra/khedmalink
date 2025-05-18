@@ -48,13 +48,9 @@ class _ProjectDetailState extends State<ProjectDetail> {
             // Status indicator and title row
             Row(
               children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.completed ? Colors.green : Colors.red,
-                  ),
+                Icon(
+                  Icons.timelapse,
+                  color: widget.completed ? Colors.green : Colors.red,
                 ),
                 const SizedBox(width: TSizes.spaceBtwItems),
                 Expanded(

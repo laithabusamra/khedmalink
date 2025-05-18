@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
-import 'package:khedma_link/constants/widgets/appbar/appbar.dart';
 import 'package:khedma_link/screens/project_detail_page/components/overall_rating.dart';
 import 'package:khedma_link/screens/project_detail_page/components/rating_indicator.dart';
 import 'package:khedma_link/screens/project_detail_page/components/user_review_card.dart';
@@ -12,9 +11,10 @@ class ProjectReviewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // the app bar
-      appBar: const TAppBar(
-        title: Text('Reviews & Ratings'),
-        showBackArrow: true,
+      appBar: AppBar(
+        title: const Text('Reviews & Ratings'),
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.white,
       ),
 
       //body

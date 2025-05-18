@@ -44,6 +44,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
       height: 28,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
+        // ignore: deprecated_member_use
         color: Colors.yellow.withOpacity(0.2),
         border: Border.all(color: Colors.orange, width: 2),
       ),
@@ -52,6 +53,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
   }
 
   Color _backgroundColor() {
+    // ignore: deprecated_member_use
     return Colors.yellow.withOpacity(0.05);
   }
 
@@ -130,6 +132,7 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
                         ),
                         boxShadow: [
                           BoxShadow(
+                            // ignore: deprecated_member_use
                             color: Colors.grey.withOpacity(0.1),
                             blurRadius: 5,
                             offset: const Offset(0, 2),

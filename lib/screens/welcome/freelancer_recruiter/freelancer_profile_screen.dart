@@ -112,7 +112,7 @@ class FreelancerProfileScreen extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: TColors.primary)),
+                          ?.copyWith(color: buttounColor)),
 
                   const SizedBox(height: TSizes.spaceBtwItems),
 

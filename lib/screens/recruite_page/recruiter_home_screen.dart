@@ -5,7 +5,6 @@ import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
-import 'package:khedma_link/screens/home_page/components/search_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 import 'package:khedma_link/screens/recruite_page/project_applicants/project_applicants_screen.dart';
 
