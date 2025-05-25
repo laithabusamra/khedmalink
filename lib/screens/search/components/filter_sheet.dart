@@ -1,37 +1,111 @@
 import 'package:flutter/material.dart';
 
-class FilterSheets extends StatelessWidget {
+class FilterSheets extends StatefulWidget {
   const FilterSheets({super.key});
+
+  @override
+  State<FilterSheets> createState() => _FilterSheetsState();
+}
+
+class _FilterSheetsState extends State<FilterSheets> {
+  int? _selectedPriceIndex;
+  final List<int> _priceOptions = [5, 10, 20, 50];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Filter by Price",
-              style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 10,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FilterChip(label: const Text("\$5"), onSelected: (_) {}),
-              FilterChip(label: const Text("\$10"), onSelected: (_) {}),
-              FilterChip(label: const Text("\$20"), onSelected: (_) {}),
-              FilterChip(label: const Text("\$50"), onSelected: (_) {}),
+              Text(
+                "Filter by Price",
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pop(context),
+              ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
+          const Divider(height: 1),
+          const SizedBox(height: 24),
+
+          // Price options
+          Text(
+            "Price Range",
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: List.generate(
+              _priceOptions.length,
+              (index) => ChoiceChip(
+                label: Text("\$${_priceOptions[index]}"),
+                selected: _selectedPriceIndex == index,
+                onSelected: (selected) {
+                  setState(() {
+                    _selectedPriceIndex = selected ? index : null;
+                  });
+                },
+                selectedColor: Theme.of(context).primaryColor.withOpacity(0.2),
+                labelStyle: TextStyle(
+                  color: _selectedPriceIndex == index
+                      ? Theme.of(context).primaryColor
+                      : Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                side: BorderSide(
+                  color: _selectedPriceIndex == index
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey.shade300,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+
+          // Apply button
           SizedBox(
             width: double.infinity,
+            height: 48,
             child: ElevatedButton(
               onPressed: () {
                 // Apply filter logic here
+                if (_selectedPriceIndex != null) {
+                  final selectedPrice = _priceOptions[_selectedPriceIndex!];
+                  // Use the selected price for filtering
+                }
                 Navigator.pop(context);
               },
-              child: const Text("Apply Filter"),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              child: const Text(
+                "Apply Filter",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ],

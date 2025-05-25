@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/widgets/already_have_account_check.dart';
 import 'package:khedma_link/constants/widgets/rounded_button.dart';
 import 'package:khedma_link/constants/widgets/rounded_input_field.dart';
@@ -14,56 +15,87 @@ class SignUpBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Background(
       child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.09),
+          children: [
+            SizedBox(height: size.height * 0.08),
             const Text(
               "SIGN UP",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 26,
               ),
             ),
             SizedBox(height: size.height * 0.03),
-            RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {},
+
+            // Outer container behind input fields
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF6F6F9), //light grey
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(0, 10),
+                    blurRadius: 30,
+                    // ignore: deprecated_member_use
+                    color: Colors.grey.withOpacity(0.15),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  RoundedInputField(
+                    hintText: "Your Name",
+                    icon: Icons.person_outline,
+                    onChanged: (value) {},
+                  ),
+                  RoundedInputField(
+                    hintText: "Your Email",
+                    icon: Icons.email_outlined,
+                    onChanged: (value) {},
+                  ),
+                  RoundedInputField(
+                    hintText: "Phone Number",
+                    icon: Icons.phone,
+                    onChanged: (value) {},
+                  ),
+                  RoundedInputField(
+                    hintText: "Portfolio Link (https://...)",
+                    icon: Icons.link,
+                    onChanged: (value) {
+                      if (!value.startsWith("https://")) {
+                        debugPrint("Portfolio link should start with https://");
+                      }
+                    },
+                  ),
+                  RoundedPasswordField(
+                    onChanged: (value) {},
+                  ),
+                ],
+              ),
             ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {},
-            ),
+
             RoundedButton(
-              text: "SIGNUP",
+              text: "SIGN UP",
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
                 );
               },
             ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
+            SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
               login: false,
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
                 );
               },
             ),
@@ -81,6 +113,7 @@ class SignUpBody extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: size.height * 0.05),
           ],
         ),
       ),

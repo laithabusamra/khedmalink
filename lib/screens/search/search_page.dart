@@ -9,6 +9,7 @@ import 'package:khedma_link/screens/home_page/components/section_heading.dart';
 import 'package:khedma_link/screens/search/components/brand_name.dart';
 import 'package:khedma_link/screens/search/components/categorytab.dart';
 import 'package:khedma_link/screens/search/components/filter_sheet.dart';
+import 'package:khedma_link/model/freelancer_model.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -20,6 +21,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
+
   final List<String> _allServices = [
     'Web Development',
     'Mobile App Development',
@@ -31,6 +33,30 @@ class _SearchPageState extends State<SearchPage> {
     'Digital Marketing'
   ];
   List<String> _filteredServices = [];
+
+  // Sample freelancer data by category
+  final List<Freelancer> codingFreelancers = [
+    const Freelancer(
+        name: 'Laith', role: 'Flutter Developer', offeredPrice: '\$200'),
+    const Freelancer(
+        name: 'Sarah', role: 'Full Stack Developer', offeredPrice: '\$300'),
+  ];
+
+  final List<Freelancer> designFreelancers = [
+    const Freelancer(
+        name: 'Maya', role: 'UI/UX Designer', offeredPrice: '\$150'),
+    const Freelancer(
+        name: 'Zaid', role: 'Graphic Designer', offeredPrice: '\$120'),
+  ];
+
+  final List<Freelancer> videoFreelancers = [
+    const Freelancer(name: 'Omar', role: 'Video Editor', offeredPrice: '\$100'),
+  ];
+
+  final List<Freelancer> writingFreelancers = [
+    const Freelancer(
+        name: 'Lina', role: 'Content Writer', offeredPrice: '\$90'),
+  ];
 
   @override
   void initState() {
@@ -82,7 +108,7 @@ class _SearchPageState extends State<SearchPage> {
                 automaticallyImplyLeading: false,
                 pinned: true,
                 backgroundColor: TColors.white,
-                expandedHeight: 440,
+                expandedHeight: 500,
                 flexibleSpace: Container(
                   color: TColors.white,
                   child: Padding(
@@ -156,10 +182,22 @@ class _SearchPageState extends State<SearchPage> {
           },
           body: TabBarView(
             children: [
-              CategoryTab(searchQuery: _searchQuery),
-              CategoryTab(searchQuery: _searchQuery),
-              CategoryTab(searchQuery: _searchQuery),
-              CategoryTab(searchQuery: _searchQuery),
+              CategoryTab(
+                searchQuery: _searchQuery,
+                freelancers: codingFreelancers,
+              ),
+              CategoryTab(
+                searchQuery: _searchQuery,
+                freelancers: designFreelancers,
+              ),
+              CategoryTab(
+                searchQuery: _searchQuery,
+                freelancers: videoFreelancers,
+              ),
+              CategoryTab(
+                searchQuery: _searchQuery,
+                freelancers: writingFreelancers,
+              ),
             ],
           ),
         ),

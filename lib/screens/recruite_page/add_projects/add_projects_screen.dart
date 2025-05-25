@@ -118,7 +118,6 @@ class _AddProjectsScreenState extends State<AddProjectsScreen> {
                             projectId: index.toString(),
                             suggestedPrice: priceValue,
                             title: title,
-                            completed: false, // always in progress
                           ));
                     },
                     child: Container(

@@ -25,10 +25,10 @@ class SearchContainer extends StatelessWidget {
       padding: padding,
       child: Container(
         width: TDeviceUtils.getScreenWidth(context),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(9),
         decoration: BoxDecoration(
           color: showBackground ? TColors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(9.0),
           border: showBorder ? Border.all(color: TColors.grey) : null,
         ),
         child: Row(
@@ -42,9 +42,9 @@ class SearchContainer extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'Search for service',
                   border: InputBorder.none,
-                  hintStyle: Theme.of(context).textTheme.bodySmall,
+                  hintStyle: Theme.of(context).textTheme.bodyMedium,
                 ),
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ],

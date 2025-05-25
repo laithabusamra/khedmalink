@@ -26,6 +26,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             style: Theme.of(context).textTheme.headlineSmall),
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
+        elevation: 2,
       ),
       body: SingleChildScrollView(
         child: Padding(

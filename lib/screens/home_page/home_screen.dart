@@ -12,10 +12,36 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const freelancer = Freelancer(
-        name: "Jack", role: "Flutter Developer", offeredPrice: "\$70/hour");
+    final freelancer = Freelancer(
+      name: "Jack",
+      role: "Flutter Developer",
+      offeredPrice: "\$70/hour",
+    );
 
-    return const Scaffold(
+    final sampleProjects = [
+      {
+        'title': 'Mobile App Development',
+        'description': 'Build a Flutter e-commerce app with Firebase backend',
+        'price': '\$70/hour',
+      },
+      {
+        'title': 'Website Redesign',
+        'description': 'Modern redesign for corporate website',
+        'price': '\$60/hour',
+      },
+      {
+        'title': 'Logo Design',
+        'description': 'Create brand identity for startup',
+        'price': '\$30/hour',
+      },
+      {
+        'title': 'SEO Optimization',
+        'description': 'Improve search rankings for existing site',
+        'price': '\$55/hour',
+      },
+    ];
+
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -23,20 +49,20 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HomeTAppBar(),
-                  SizedBox(height: TSizes.spaceBtwSections),
+                  const HomeTAppBar(),
+                  const SizedBox(height: TSizes.spaceBtwSections),
                   Padding(
-                    padding: EdgeInsets.only(left: TSizes.defaultSpace),
+                    padding: const EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
-                        SectionHeading(
+                        const SectionHeading(
                           title: 'Active Projects',
                           showActionButton: false,
                           textColor: Colors.white,
                         ),
-                        SizedBox(height: TSizes.spaceBtwItems),
+                        const SizedBox(height: TSizes.spaceBtwItems),
                         HomeCategories(freelancer: freelancer),
-                        SizedBox(height: TSizes.spaceBtwSections),
+                        const SizedBox(height: TSizes.spaceBtwSections),
                       ],
                     ),
                   ),
@@ -44,17 +70,16 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(TSizes.defaultSpace),
+              padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
-                  SectionHeading(
+                  const SectionHeading(
                     title: 'Pending projects',
                     onPressed: null,
                     showActionButton: false,
                   ),
                   ListOfProject(
                     freelancer: freelancer,
-                    projectData: {},
                   ),
                 ],
               ),

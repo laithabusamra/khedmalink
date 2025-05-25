@@ -42,7 +42,7 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "Login",
               // ignore: deprecated_member_use
-              color: buttounColor.withOpacity(0.83),
+              color: buttounColor.withOpacity(0.70),
               textColor: Colors.white,
               press: () {
                 Navigator.push(

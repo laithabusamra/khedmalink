@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/screens/welcome/freelancer_recruiter/freelancer_profile_screen.dart';
 
 class ProjectApplicantsScreen extends StatefulWidget {
@@ -43,11 +44,13 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
         content: Text('Are you sure you want to $action $name?'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('Cancel')),
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
           TextButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: Text(action)),
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(action),
+          ),
         ],
       ),
     );
@@ -56,9 +59,12 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        elevation: 1,
         title: Text(widget.projectTitle),
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
       body: _applicants.isEmpty
           ? const Center(child: Text('No applicants left.'))
@@ -66,9 +72,20 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
               itemCount: _applicants.length,
               itemBuilder: (context, index) {
                 final applicant = _applicants[index];
-                return Card(
+                return Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -76,9 +93,6 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                       children: [
                         Row(
                           children: [
-                            CircleAvatar(
-                              child: Text(applicant['name'][0].toUpperCase()),
-                            ),
                             const SizedBox(width: 16),
                             Expanded(
                               child: GestureDetector(
@@ -105,44 +119,62 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.blue,
+                                        fontSize: 16,
                                         decoration: TextDecoration.underline,
                                       ),
                                     ),
-                                    Text(applicant['role']),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      applicant['role'],
+                                      style: const TextStyle(
+                                        color: Colors.black54,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12),
                         Text(
                           'Offered Price: ${applicant['offeredPrice']}',
-                          style: const TextStyle(color: Colors.green),
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.red,
+                              ),
                               onPressed: () async {
                                 final confirm = await _showConfirmationDialog(
-                                    'Reject', applicant['name']);
+                                  'Reject',
+                                  applicant['name'],
+                                );
                                 if (confirm == true) {
                                   widget.onReject(index);
                                   setState(() => _applicants.removeAt(index));
                                 }
                               },
-                              child: const Text(
-                                'Reject',
-                                style: TextStyle(color: Colors.red),
-                              ),
+                              child: const Text('Reject'),
                             ),
                             const SizedBox(width: 8),
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: buttounColor.withOpacity(0.9),
+                                foregroundColor: Colors.white,
+                              ),
                               onPressed: () async {
                                 final confirm = await _showConfirmationDialog(
-                                    'Accept', applicant['name']);
+                                  'Accept',
+                                  applicant['name'],
+                                );
                                 if (confirm == true) {
                                   widget.onAccept(applicant);
                                   setState(() => _applicants.removeAt(index));

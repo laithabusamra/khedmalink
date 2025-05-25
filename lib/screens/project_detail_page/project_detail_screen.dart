@@ -8,7 +8,6 @@ class ProjectDetail extends StatefulWidget {
   final String title;
   final String description;
   final double suggestedPrice;
-  final bool completed;
 
   const ProjectDetail({
     super.key,
@@ -16,7 +15,6 @@ class ProjectDetail extends StatefulWidget {
     required this.title,
     required this.description,
     required this.suggestedPrice,
-    required this.completed,
   });
 
   @override
@@ -34,50 +32,57 @@ class _ProjectDetailState extends State<ProjectDetail> {
   }
 
   @override
+  void dispose() {
+    _fixedPriceController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Project Details'),
         backgroundColor: TColors.white,
+        foregroundColor: Colors.black,
+        elevation: 0.5,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(TSizes.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Status indicator and title row
+            // Project Status and Title
             Row(
               children: [
-                Icon(
-                  Icons.timelapse,
-                  color: widget.completed ? Colors.green : Colors.red,
-                ),
-                const SizedBox(width: TSizes.spaceBtwItems),
+                const SizedBox(width: TSizes.sm),
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: TSizes.spaceBtwItems),
 
-            // Project Description
+            // Description
             Text(
               widget.description,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: theme.textTheme.bodyLarge,
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
 
-            // Pricing Type Selection
-            const Text(
+            // Pricing Options
+            Text(
               'Select Pricing Type:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: TSizes.spaceBtwItems),
+            const SizedBox(height: TSizes.sm),
             Row(
               children: [
                 Radio<bool>(
@@ -95,14 +100,14 @@ class _ProjectDetailState extends State<ProjectDetail> {
                 const Text('Hourly Rate'),
               ],
             ),
-            const SizedBox(height: TSizes.spaceBtwSections),
+            const SizedBox(height: TSizes.spaceBtwItems),
 
-            // Dynamic Price Input
+            // Price input
             if (_isFixedPrice)
               TextFormField(
                 controller: _fixedPriceController,
                 decoration: const InputDecoration(
-                  labelText: 'Your Price',
+                  labelText: 'Your Fixed Price',
                   prefixText: '\$',
                   border: OutlineInputBorder(),
                 ),
@@ -113,31 +118,36 @@ class _ProjectDetailState extends State<ProjectDetail> {
                 ],
               )
             else
-              Column(
-                children: [
-                  const SizedBox(height: 8),
-                  Center(
-                    child: Text(
-                      'The price will be \$${widget.suggestedPrice} per hour',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
+                ),
+                child: Text(
+                  'Hourly rate: \$${widget.suggestedPrice.toStringAsFixed(2)}/hr',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800],
                   ),
-                ],
+                  textAlign: TextAlign.center,
+                ),
               ),
+
             const SizedBox(height: TSizes.spaceBtwSections),
 
             // Submit Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _submitProposal,
+                onPressed: _canSubmit() ? _submitProposal : null,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Colors.blue,
                 ),
-                child: const Text('SUBMIT'),
+                child:
+                    const Text('SUBMIT', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
@@ -146,16 +156,17 @@ class _ProjectDetailState extends State<ProjectDetail> {
     );
   }
 
-  void _submitProposal() {
-    if (_isFixedPrice && _fixedPriceController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a fixed price')),
-      );
-      return;
+  bool _canSubmit() {
+    if (_isFixedPrice) {
+      final text = _fixedPriceController.text.trim();
+      return text.isNotEmpty && double.tryParse(text) != null;
     }
+    return true;
+  }
 
+  void _submitProposal() {
     final price = _isFixedPrice
-        ? double.tryParse(_fixedPriceController.text) ?? 0
+        ? double.tryParse(_fixedPriceController.text.trim()) ?? 0
         : widget.suggestedPrice;
 
     Navigator.pop(context);
@@ -163,16 +174,10 @@ class _ProjectDetailState extends State<ProjectDetail> {
       SnackBar(
         content: Text(
           _isFixedPrice
-              ? 'Fixed price proposal of \$$price submitted!'
-              : 'Hourly rate proposal of \$${widget.suggestedPrice}/hour submitted!',
+              ? 'Fixed price proposal of \$${price.toStringAsFixed(2)} submitted!'
+              : 'Hourly rate proposal of \$${widget.suggestedPrice.toStringAsFixed(2)}/hour submitted!',
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _fixedPriceController.dispose();
-    super.dispose();
   }
 }

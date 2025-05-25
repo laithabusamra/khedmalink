@@ -4,9 +4,14 @@ import 'package:khedma_link/constants/widgets/text_filed_container.dart';
 
 class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final TextStyle? hintStyle;
+  final TextStyle? textStyle;
+
   const RoundedPasswordField({
     super.key,
     required this.onChanged,
+    this.hintStyle,
+    this.textStyle,
   });
 
   @override
@@ -15,13 +20,15 @@ class RoundedPasswordField extends StatelessWidget {
       childe: TextField(
         obscureText: true,
         onChanged: onChanged,
-        decoration: const InputDecoration(
+        style: textStyle ?? const TextStyle(color: Color(0xFF1E1E2C)),
+        decoration: InputDecoration(
           hintText: "Password",
-          icon: Icon(
+          hintStyle: hintStyle ?? const TextStyle(color: Color(0xFFB0B0C3)),
+          icon: const Icon(
             Icons.lock,
             color: buttounColor,
           ),
-          suffixIcon: Icon(
+          suffixIcon: const Icon(
             Icons.visibility,
             color: buttounColor,
           ),
