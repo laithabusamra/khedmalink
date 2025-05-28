@@ -6,6 +6,7 @@ import 'package:khedma_link/constants/widgets/appbar/tabbar.dart';
 import 'package:khedma_link/constants/widgets/menu_icon.dart';
 import 'package:khedma_link/screens/home_page/components/search_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
+import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
 import 'package:khedma_link/screens/search/components/brand_name.dart';
 import 'package:khedma_link/screens/search/components/categorytab.dart';
 import 'package:khedma_link/screens/search/components/filter_sheet.dart';
@@ -157,11 +158,24 @@ class _SearchPageState extends State<SearchPage> {
                         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
                         GridLayout(
                           itemCount: _filteredServices.length,
-                          mainAxisExtent: 80,
+                          mainAxisExtent: 75,
                           iteamBuilder: (_, index) {
                             return BrandCart(
-                              showBorder: false,
-                              title: _filteredServices[index],
+                              title: 'Flutter Developer',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const ProjectDetail(
+                                      projectId: '123',
+                                      title: 'Flutter Developer',
+                                      description:
+                                          'Looking for experienced Flutter developer',
+                                      suggestedPrice: 200,
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           },
                         )

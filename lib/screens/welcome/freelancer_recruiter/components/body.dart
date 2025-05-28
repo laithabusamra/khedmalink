@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:khedma_link/constants/colors.dart';
-import 'package:khedma_link/constants/widgets/rounded_button.dart';
+import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/constants/widgets/rounded_container.dart';
 import 'package:khedma_link/navigation_menu.dart';
 import 'package:khedma_link/screens/recruite_page/recruiter_navigation_menu.dart';
 import 'package:khedma_link/screens/welcome/components/background.dart';
@@ -38,23 +38,87 @@ class ScreenBody extends StatelessWidget {
               'WELCOME TO KHEDMA LINK',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.02),
+            SizedBox(height: size.height * 0.01),
             Image.asset(
               'assets/images/khedmaLink.png',
               height: 299,
               width: 300,
             ),
             SizedBox(height: size.height * 0.05),
-            RoundedButton(
-              text: "Freelancer",
-              press: () => _handleUserSelection(context, false),
-            ),
-            RoundedButton(
-              text: "Recruiter",
-              // ignore: deprecated_member_use
-              color: buttounColor.withOpacity(0.70),
-              textColor: Colors.white,
-              press: () => _handleUserSelection(context, true),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Freelancer Container
+                  GestureDetector(
+                    onTap: () => _handleUserSelection(context, false),
+                    child: RoundedContainer(
+                      backgroundColor: Colors.white,
+                      width: 180,
+                      height: 230,
+                      padding: const EdgeInsets.all(7),
+                      margin: const EdgeInsets.all(8),
+                      childe: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: TSizes.defaultSpace),
+                            Image.asset(
+                              "assets/images/freelancer.png",
+                              width: 140,
+                              height: 140,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Freelancer',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Recruiter Container
+                  GestureDetector(
+                    onTap: () => _handleUserSelection(context, true),
+                    child: RoundedContainer(
+                      backgroundColor: Colors.white,
+                      width: 180,
+                      height: 230,
+                      padding: const EdgeInsets.all(7),
+                      margin: const EdgeInsets.all(8),
+                      childe: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: TSizes.defaultSpace),
+                            Image.asset(
+                              "assets/images/rec.png",
+                              width: 140,
+                              height: 140,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Recruiter',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

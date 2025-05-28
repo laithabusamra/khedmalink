@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
+import 'package:khedma_link/screens/search/components/project_card.dart';
 
 class CategoryTab extends StatelessWidget {
   final String searchQuery;
@@ -32,28 +34,95 @@ class CategoryTab extends StatelessWidget {
               itemCount: filteredProjects.length,
               itemBuilder: (context, index) {
                 final freelancer = filteredProjects[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ProjectDetail(
-                          projectId: '1',
-                          title: "flutter developer",
-                          description: "looking for flutter developer",
-                          suggestedPrice: 200,
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
+                  child: Stack(
+                    children: [
+                      // Make the entire ProjectCard clickable
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ProjectDetail(
+                                projectId: '1',
+                                title: "flutter developer",
+                                description: "looking for flutter developer",
+                                suggestedPrice: 200,
+                              ),
+                            ),
+                          );
+                        },
+                        child: ProjectCard(freelancer: freelancer),
+                      ),
+                      // Apply button on top
+                      Positioned(
+                        bottom: 12,
+                        right: 12,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _showApplyDialog(context, freelancer);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            backgroundColor: buttounColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          child: const Text(
+                            'Apply',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    );
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
-                    child: ProjectCard(freelancer: freelancer),
+                    ],
                   ),
                 );
               },
             ),
+    );
+  }
+
+  void _showApplyDialog(BuildContext context, Freelancer freelancer) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Apply for ${freelancer.role}"),
+        content: const Text("Are you sure you want to apply for this project?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            style: TextButton.styleFrom(
+              foregroundColor: buttounColor,
+            ),
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Application submitted successfully"),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: buttounColor,
+            ),
+            child: const Text(
+              "Confirm",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -81,127 +150,6 @@ class CategoryTab extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class ProjectCard extends StatelessWidget {
-  final Freelancer freelancer;
-
-  const ProjectCard({
-    super.key,
-    required this.freelancer,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(TSizes.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.blue[100],
-                  child: Text(
-                    freelancer.name.substring(0, 1),
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ),
-                const SizedBox(width: TSizes.sm),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      freelancer.name,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    Text(
-                      freelancer.role,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey[600],
-                          ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: TSizes.sm,
-                    vertical: TSizes.xs,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.green[50],
-                    borderRadius: BorderRadius.circular(TSizes.sm),
-                  ),
-                  child: Text(
-                    freelancer.offeredPrice,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.green[800],
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: TSizes.md),
-
-            // Description (static for now)
-            Text(
-              'Project Title',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-            const SizedBox(height: TSizes.xs),
-            Text(
-              'Detailed project description would go here...',
-              style: Theme.of(context).textTheme.bodyMedium,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: TSizes.md),
-
-            // Skills
-            Wrap(
-              spacing: TSizes.xs,
-              runSpacing: TSizes.xs,
-              children: [
-                _buildSkillChip('UI/UX', context),
-                _buildSkillChip('Figma', context),
-                _buildSkillChip('Prototyping', context),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSkillChip(String skill, BuildContext context) {
-    return Chip(
-      label: Text(
-        skill,
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: Colors.blue[800],
-            ),
-      ),
-      backgroundColor: Colors.blue[50],
-      side: BorderSide.none,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(TSizes.sm),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: TSizes.xs),
-      visualDensity: VisualDensity.compact,
     );
   }
 }

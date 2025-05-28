@@ -5,7 +5,8 @@ import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/recruite_page/my_projects/my_project_todo.dart';
 
 class MyProjectsScreen extends StatefulWidget {
-  const MyProjectsScreen({super.key});
+  final String initialFilter;
+  const MyProjectsScreen({super.key, this.initialFilter = 'all'});
 
   @override
   State<MyProjectsScreen> createState() => _MyProjectsScreenState();
@@ -23,13 +24,13 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       'title': 'Mobile App Development',
       'description': 'Build a Flutter e-commerce app with Firebase backend',
       'price': '\$70 per hour',
-      'status': 'done', // finished project
+      'status': 'done',
     },
     {
       'title': 'Website Redesign',
       'description': 'Modern redesign for corporate website',
       'price': '\$60 per hour',
-      'status': 'in_progress', // ongoing project
+      'status': 'in_progress',
     },
     {
       'title': 'Logo Design',
@@ -45,14 +46,13 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
     },
   ];
 
-  // Filters with keys for internal logic and labels for UI
   final List<Map<String, String>> _filters = [
     {'key': 'all', 'label': 'All'},
     {'key': 'in_progress', 'label': 'In Progress'},
     {'key': 'done', 'label': 'Done'},
   ];
 
-  String _selectedFilterKey = 'all';
+  late String _selectedFilterKey;
 
   final Map<String, String> _statusLabels = {
     'in_progress': 'In Progress',
@@ -69,25 +69,25 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
     'done': Colors.green,
   };
 
-  // Mark a project as done (finished)
+  @override
+  void initState() {
+    super.initState();
+    _selectedFilterKey = widget.initialFilter;
+  }
+
   void _markProjectDone(int index) {
     setState(() {
       _projects[index]['status'] = 'done';
     });
   }
 
-  // Return projects based on selected filter
   List<Map<String, dynamic>> get _visibleProjects {
-    if (_selectedFilterKey == 'all') {
-      return _projects;
-    }
-    return _projects.where((project) {
-      final status = project['status'] as String;
-      return status == _selectedFilterKey;
-    }).toList();
+    if (_selectedFilterKey == 'all') return _projects;
+    return _projects
+        .where((project) => project['status'] == _selectedFilterKey)
+        .toList();
   }
 
-  // Circle indicator with icon and color based on status
   Widget _statusCircle(String status) {
     final color = _statusColors[status] ?? Colors.black;
     final icon = _statusIcons[status] ?? Icons.help;
@@ -97,7 +97,6 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       height: 28,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        // ignore: deprecated_member_use
         color: color.withOpacity(0.2),
         border: Border.all(color: color, width: 2),
       ),
@@ -140,7 +139,6 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
   Widget _buildProjectCard(Map<String, dynamic> project, int index) {
     final status = project['status'] as String;
     final isDone = status == 'done';
-
     final globalIndex = _projects.indexOf(project);
 
     return GestureDetector(
@@ -160,14 +158,12 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          // ignore: deprecated_member_use
           color: _statusColors[status]?.withOpacity(0.05) ?? Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
               color: _statusColors[status] ?? Colors.black12, width: 1.5),
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 5,
               offset: const Offset(0, 2),

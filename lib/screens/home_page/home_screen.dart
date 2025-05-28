@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/constants/widgets/rounded_container.dart';
 import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
 import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
@@ -49,14 +50,18 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const HomeTAppBar(),
+                  const HomeTAppBar(
+                    subtitleText: "Freelancer",
+                    titleText: "sami",
+                    avatarImage: 'assets/images/avatar.jpg',
+                  ),
                   const SizedBox(height: TSizes.spaceBtwSections),
                   Padding(
                     padding: const EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
                         const SectionHeading(
-                          title: 'Active Projects',
+                          title: 'New Projects',
                           showActionButton: false,
                           textColor: Colors.white,
                         ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/constants/widgets/rounded_container.dart';
 import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/home_page/components/home_appbar.dart';
-import 'package:khedma_link/screens/home_page/components/home_categoeies.dart';
 import 'package:khedma_link/screens/home_page/components/primary_header_container.dart';
 import 'package:khedma_link/screens/home_page/components/section_heading.dart';
-import 'package:khedma_link/screens/recruite_page/project_applicants/project_applicants_screen.dart';
+import 'package:khedma_link/screens/recruite_page/add_projects/add_screen.dart';
+import 'package:khedma_link/screens/recruite_page/components/active_home_categories.dart';
+import 'package:khedma_link/screens/recruite_page/components/pending_projects_screen.dart';
+import 'package:khedma_link/screens/recruite_page/my_projects/my_projects_screen.dart';
 
 class RecruiterHomeScreen extends StatefulWidget {
   const RecruiterHomeScreen({super.key});
@@ -80,24 +82,21 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HomeTAppBar(),
+                  HomeTAppBar(
+                    titleText: "laith",
+                    subtitleText: "Reruiter",
+                    avatarImage: "assets/images/avatar.jpg",
+                  ),
                   SizedBox(height: TSizes.spaceBtwSections),
                   Padding(
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
-                        SectionHeading(
-                          title: 'Active Projects',
-                          showActionButton: false,
-                          textColor: Colors.white,
-                        ),
-                        SizedBox(height: TSizes.spaceBtwItems),
-                        HomeCategories(
-                          freelancer: Freelancer(
-                              name: "laith",
-                              role: 'graphic',
-                              offeredPrice: "\$90"),
-                        ),
+                        // SectionHeading(
+                        //   title: 'Active Projects',
+                        //   showActionButton: false,
+                        //   textColor: Colors.white,
+                        // ),
                         SizedBox(height: TSizes.spaceBtwSections),
                       ],
                     ),
@@ -111,75 +110,92 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SectionHeading(
-                    title: 'Pending Projects',
+                    title: 'Ready to Manage the Projects',
                     showActionButton: false,
                   ),
-                  ListView.separated(
+
+                  // Grid layout for management options
+                  GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: pendingProjects.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: TSizes.spaceBtwItems),
-                    itemBuilder: (context, index) {
-                      final project = pendingProjects[index];
-                      return Card(
-                        elevation: 2,
-                        child: ListTile(
-                          title: Text(project['title']),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(project['description']),
-                              const SizedBox(height: 4),
-                              Text(
-                                '${project['applicants'].length} applicants',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(color: TColors.primary),
-                              ),
-                            ],
-                          ),
-                          trailing: Text(project['price']),
-                          onTap: () {
-                            Navigator.push(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1,
+                    mainAxisSpacing: TSizes.spaceBtwItems,
+                    crossAxisSpacing: TSizes.spaceBtwItems,
+                    children: [
+                      // Create Project
+                      _buildManagementOption(
+                        context,
+                        icon: Icons.add_circle_outline,
+                        title: 'Create Project',
+                        color: Colors.blueAccent,
+                        onTap: () {
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProjectApplicantsScreen(
-                                  projectId: project['id'],
-                                  projectTitle: project['title'],
-                                  projectDescription: project['description'],
-                                  projectPrice: project['price'],
-                                  applicants: List.from(project['applicants']),
-                                  onAccept: (applicant) {
-                                    setState(() {
-                                      activeProjects.add({
-                                        'projectId': project['id'],
-                                        'title': project['title'],
-                                        'applicant': applicant,
-                                        'status': 'active',
-                                      });
-                                      pendingProjects.removeAt(index);
-                                    });
-                                  },
-                                  onReject: (applicantIndex) {
-                                    setState(() {
-                                      pendingProjects[index]['applicants']
-                                          .removeAt(applicantIndex);
+                                  builder: (context) => const AddScreen()));
+                        },
+                      ),
 
-                                      if (pendingProjects[index]['applicants']
-                                          .isEmpty) {
-                                        pendingProjects.removeAt(index);
-                                      }
-                                    });
-                                  },
-                                ),
+                      // Active Projects
+                      _buildManagementOption(
+                        context,
+                        icon: Icons.work_outline,
+                        title: 'Active Projects',
+                        color: Colors.green,
+                        count: 7,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ActiveHomeCategories(
+                                        freelancer: Freelancer(
+                                            name: "laith",
+                                            role: 'graphic',
+                                            offeredPrice: "\$90"),
+                                      )));
+                        },
+                      ),
+
+                      // Pending Projects
+                      _buildManagementOption(
+                        context,
+                        icon: Icons.pending_actions,
+                        title: 'Pending Projects',
+                        color: Colors.orange,
+                        count: 3,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PendingProjectsScreen(
+                                pendingProjects: pendingProjects,
+                                activeProjects: activeProjects,
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                            ),
+                          );
+                        },
+                      ),
+
+                      // Project History
+                      _buildManagementOption(
+                        context,
+                        icon: Icons.history,
+                        title: 'Project History',
+                        color: Colors.purple,
+                        count: 2,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const MyProjectsScreen(initialFilter: 'done'),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -189,4 +205,52 @@ class _RecruiterHomeScreenState extends State<RecruiterHomeScreen> {
       ),
     );
   }
+}
+
+Widget _buildManagementOption(
+  BuildContext context, {
+  required IconData icon,
+  required String title,
+  required Color color,
+  int? count,
+  required VoidCallback onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: RoundedContainer(
+      backgroundColor: Colors.white,
+      padding: const EdgeInsets.all(TSizes.md),
+      childe: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 40, color: color),
+          const SizedBox(height: TSizes.sm),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          if (count != null) ...[
+            const SizedBox(height: TSizes.xs),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                '$count',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    ),
+  );
 }

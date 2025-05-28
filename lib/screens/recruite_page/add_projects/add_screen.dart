@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
 
 class AddScreen extends StatefulWidget {
@@ -28,8 +29,8 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
         title: const Text('Add New Project'),
+        elevation: 2,
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
@@ -44,21 +45,26 @@ class _AddScreenState extends State<AddScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(children: [
-                Image.asset(
+              // Centered Logo
+              Center(
+                child: Image.asset(
                   'assets/images/Kl.png',
-                  height: 60,
-                  width: 60,
+                  height: 80, // Slightly larger
+                  width: 80,
                 ),
-              ]),
+              ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
               // Project Title
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Project Title',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[50],
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -72,11 +78,15 @@ class _AddScreenState extends State<AddScreen> {
               // Description
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Description',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[50],
                 ),
-                maxLines: 3,
+                maxLines: 4, // Increased from 3
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -89,10 +99,14 @@ class _AddScreenState extends State<AddScreen> {
               // Price
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Price per hour',
-                  prefixText: '\$',
-                  border: OutlineInputBorder(),
+                  prefixText: '\$ ',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[50],
                 ),
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
@@ -108,12 +122,27 @@ class _AddScreenState extends State<AddScreen> {
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              // Save Button
+              // Improved Save Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _submitForm,
-                  child: const Text('Save Project'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: buttounColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 2,
+                  ),
+                  child: const Text(
+                    'SAVE PROJECT',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ],

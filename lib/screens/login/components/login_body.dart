@@ -5,9 +5,10 @@ import 'package:khedma_link/constants/widgets/rounded_button.dart';
 import 'package:khedma_link/constants/widgets/rounded_input_field.dart';
 import 'package:khedma_link/constants/widgets/rounded_password_field.dart';
 import 'package:khedma_link/screens/Signup/comonents/or_divider.dart';
-import 'package:khedma_link/screens/Signup/comonents/social_icons.dart';
 import 'package:khedma_link/screens/Signup/signup_screen.dart';
 import 'package:khedma_link/screens/login/components/background.dart';
+import 'package:khedma_link/screens/login/components/forget_pass.dart';
+import 'package:khedma_link/screens/login/components/reset_password_screen.dart';
 import 'package:khedma_link/screens/welcome/freelancer_recruiter/freelancer_recruiters_screen.dart';
 
 class LoginBody extends StatelessWidget {
@@ -86,6 +87,18 @@ class LoginBody extends StatelessWidget {
                 ],
               ),
             ),
+
+            const SizedBox(height: 16),
+            ForgetPassword(
+              press: () {
+                // Handle password reset navigation
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ResetPasswordScreen()));
+              },
+            ),
+            const OrDivider(),
             const SizedBox(height: 16),
             AlreadyHaveAnAccountCheck(
               press: () {
@@ -97,23 +110,21 @@ class LoginBody extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 16),
-            const OrDivider(),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SocialIcon(
-                  iconSrc: 'assets/images/facebook.png',
-                  press: () {},
-                ),
-                const SizedBox(width: 16),
-                SocialIcon(
-                  iconSrc: 'assets/images/google.png',
-                  press: () {},
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: <Widget>[
+            //     SocialIcon(
+            //       iconSrc: 'assets/images/facebook.png',
+            //       press: () {},
+            //     ),
+            //     const SizedBox(width: 16),
+            //     SocialIcon(
+            //       iconSrc: 'assets/images/google.png',
+            //       press: () {},
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: size.height * 0.05),
           ],
         ),

@@ -7,54 +7,85 @@ import 'package:khedma_link/screens/home_page/components/home_controller_file/br
 import 'package:khedma_link/screens/search/components/circular_image.dart';
 
 class BrandCart extends StatelessWidget {
-  const BrandCart(
-      {super.key, required this.showBorder, this.onTap, required this.title});
-  final bool showBorder;
-  final void Function()? onTap;
+  const BrandCart({
+    super.key,
+    required this.title,
+    this.showBorder = true,
+    this.onTap,
+    this.imagePath = 'assets/banner/jobsearch.png',
+    this.brandName = 'Green House',
+    this.brandTextSize = TextSizes.large,
+    this.backgroundColor = Colors.transparent,
+    this.imageOverlayColor = TColors.black,
+    this.imageBackgroundColor = Colors.transparent,
+    this.subtitle,
+    this.padding = const EdgeInsets.all(TSizes.sm),
+    this.betweenSpacing = TSizes.spaceBtwItems / 6,
+    this.maxLines = 1,
+  });
+
   final String title;
+  final bool showBorder;
+  final VoidCallback? onTap;
+  final String imagePath;
+  final String brandName;
+  final TextSizes brandTextSize;
+  final Color backgroundColor;
+  final Color imageOverlayColor;
+  final Color imageBackgroundColor;
+  final String? subtitle;
+  final EdgeInsets padding;
+  final double betweenSpacing;
+  final int maxLines;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: RoundedContainer(
-        padding: const EdgeInsets.all(TSizes.sm),
+        padding: padding,
         showBorder: showBorder,
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundColor,
         childe: Row(
           children: [
-            //Icon
-            const Flexible(
+            // Image/Icon
+            Flexible(
               child: CirculaerImage(
                 isNetworkImage: false,
-                image: 'assets/banner/jobsearch.png',
-                backgroundColor: Colors.transparent,
-                overLayColor: TColors.black,
+                image: imagePath,
+                backgroundColor: imageBackgroundColor,
+                overLayColor: imageOverlayColor,
               ),
             ),
-            const SizedBox(width: TSizes.spaceBtwItems / 2),
+            SizedBox(width: betweenSpacing),
 
-            // Text
+            // Text Content
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ProviderNameWithVerifiedIcon(
-                      title: 'Green House', brandTextSize: TextSizes.large),
-                  Text(
-                    "20 offers with recommendation",
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelMedium,
+                  ProviderNameWithVerifiedIcon(
+                    title: brandName,
+                    brandTextSize: brandTextSize,
                   ),
+                  if (subtitle != null) ...[
+                    Text(
+                      subtitle!,
+                      style: Theme.of(context).textTheme.labelMedium,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: betweenSpacing / 2),
+                  ],
                   Text(
                     title,
                     style: Theme.of(context).textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  )
+                    maxLines: maxLines,
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
