@@ -102,6 +102,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                         BoxShadow(
                           offset: const Offset(0, 10),
                           blurRadius: 30,
+                          // ignore: deprecated_member_use
                           color: Colors.grey.withOpacity(0.15),
                         ),
                       ],

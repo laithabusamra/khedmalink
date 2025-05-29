@@ -62,7 +62,7 @@ class PendingProjectsList extends StatelessWidget {
                       ),
                       Text(
                         project['price'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: TColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
@@ -86,7 +86,7 @@ class PendingProjectsList extends StatelessWidget {
                   // Applicants Info
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.people_outline,
                         size: 16,
                         color: TColors.primary,
@@ -94,7 +94,7 @@ class PendingProjectsList extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '$applicantsCount ${applicantsCount == 1 ? 'applicant' : 'applicants'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: TColors.primary,
                           fontSize: 13,
                         ),

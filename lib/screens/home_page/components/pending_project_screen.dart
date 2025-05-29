@@ -79,6 +79,7 @@ class PendingProjectScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
                 boxShadow: [
                   BoxShadow(
+                    // ignore: deprecated_member_use
                     color: Colors.grey.withOpacity(0.15),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
@@ -137,6 +138,7 @@ class PendingProjectScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
+                        // ignore: deprecated_member_use
                         color: statusColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),

@@ -48,14 +48,6 @@ class ListOfProject extends StatelessWidget {
       },
     ];
 
-    final pendingProjects = projects.map((project) {
-      return PendingProject(
-        projectName: project['title']!,
-        description: project['description']!,
-        status: _parseStatus(project['status']!),
-      );
-    }).toList();
-
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -80,6 +72,7 @@ class ListOfProject extends StatelessWidget {
               borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
               boxShadow: [
                 BoxShadow(
+                  // ignore: deprecated_member_use
                   color: Colors.grey.withOpacity(0.1),
                   blurRadius: 5,
                   offset: const Offset(0, 2),

@@ -80,6 +80,7 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
+                        // ignore: deprecated_member_use
                         color: Colors.white.withOpacity(0.3),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
@@ -167,6 +168,7 @@ class _ProjectApplicantsScreenState extends State<ProjectApplicantsScreen> {
                             const SizedBox(width: 8),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
+                                // ignore: deprecated_member_use
                                 backgroundColor: buttounColor.withOpacity(0.9),
                                 foregroundColor: Colors.white,
                               ),

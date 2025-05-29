@@ -97,6 +97,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       height: 28,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
+        // ignore: deprecated_member_use
         color: color.withOpacity(0.2),
         border: Border.all(color: color, width: 2),
       ),
@@ -158,12 +159,14 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
+          // ignore: deprecated_member_use
           color: _statusColors[status]?.withOpacity(0.05) ?? Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
               color: _statusColors[status] ?? Colors.black12, width: 1.5),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 5,
               offset: const Offset(0, 2),

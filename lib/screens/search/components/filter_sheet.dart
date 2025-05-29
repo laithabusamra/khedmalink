@@ -59,6 +59,7 @@ class _FilterSheetsState extends State<FilterSheets> {
                     _selectedPriceIndex = selected ? index : null;
                   });
                 },
+                // ignore: deprecated_member_use
                 selectedColor: Theme.of(context).primaryColor.withOpacity(0.2),
                 labelStyle: TextStyle(
                   color: _selectedPriceIndex == index
@@ -86,10 +87,7 @@ class _FilterSheetsState extends State<FilterSheets> {
             child: ElevatedButton(
               onPressed: () {
                 // Apply filter logic here
-                if (_selectedPriceIndex != null) {
-                  final selectedPrice = _priceOptions[_selectedPriceIndex!];
-                  // Use the selected price for filtering
-                }
+                if (_selectedPriceIndex != null) {}
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(

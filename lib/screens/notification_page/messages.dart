@@ -24,6 +24,7 @@ class Messages extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(14),
+      // ignore: deprecated_member_use
       splashColor: TColors.primary.withOpacity(0.15),
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -35,6 +36,7 @@ class Messages extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.white.withOpacity(0.7),
               blurRadius: 10,
               offset: const Offset(0, 5),

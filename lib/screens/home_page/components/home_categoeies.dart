@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khedma_link/model/freelancer_model.dart';
-import 'package:khedma_link/screens/home_page/components/vertical_image.dart';
 import 'package:khedma_link/screens/project_detail_page/project_detail_screen.dart';
-import 'package:khedma_link/screens/todo_home.dart';
 import 'package:khedma_link/constants/widgets/rounded_container.dart';
 
 class HomeCategories extends StatelessWidget {
