@@ -13,7 +13,8 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TColors.white,
-        surfaceTintColor: Colors.transparent,
+        centerTitle: true,
+        elevation: 2,
         title: Text(
           'Profile',
           style: Theme.of(context)

@@ -15,13 +15,31 @@ class _AddScreenState extends State<AddScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();
+  final _skillController = TextEditingController();
+  final List<String> _skills = [];
 
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
     _priceController.dispose();
+    _skillController.dispose();
     super.dispose();
+  }
+
+  void _addSkill() {
+    if (_skillController.text.isNotEmpty) {
+      setState(() {
+        _skills.add(_skillController.text);
+        _skillController.clear();
+      });
+    }
+  }
+
+  void _removeSkill(int index) {
+    setState(() {
+      _skills.removeAt(index);
+    });
   }
 
   @override
@@ -49,7 +67,7 @@ class _AddScreenState extends State<AddScreen> {
               Center(
                 child: Image.asset(
                   'assets/images/Kl.png',
-                  height: 80, // Slightly larger
+                  height: 80,
                   width: 80,
                 ),
               ),
@@ -86,7 +104,7 @@ class _AddScreenState extends State<AddScreen> {
                   filled: true,
                   fillColor: Colors.grey[50],
                 ),
-                maxLines: 4, // Increased from 3
+                maxLines: 4,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -120,9 +138,60 @@ class _AddScreenState extends State<AddScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: TSizes.spaceBtwItems),
+
+              // Required Skills Section
+              const Text(
+                'Required Skills',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Skills Input
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _skillController,
+                      decoration: InputDecoration(
+                        hintText: 'Add a skill',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: _addSkill,
+                        ),
+                      ),
+                      onFieldSubmitted: (value) => _addSkill(),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Skills Chips
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _skills.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final skill = entry.value;
+                  return Chip(
+                    label: Text(skill),
+                    deleteIcon: const Icon(Icons.close, size: 16),
+                    onDeleted: () => _removeSkill(index),
+                  );
+                }).toList(),
+              ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              // Improved Save Button
+              // Save Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -158,6 +227,7 @@ class _AddScreenState extends State<AddScreen> {
         'title': _titleController.text,
         'description': _descriptionController.text,
         'price': '\$${_priceController.text} per hour',
+        'skills': List<String>.from(_skills), // Add skills to the project
         'completed': true,
       };
 
