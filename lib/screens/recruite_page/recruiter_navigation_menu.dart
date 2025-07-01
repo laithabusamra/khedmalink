@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:khedma_link/constants/colors.dart';
-import 'package:khedma_link/screens/recruite_page/add_projects/add_projects_screen.dart';
+import 'package:khedma_link/screens/recruite_page/add_projects/add_screen.dart';
 import 'package:khedma_link/screens/recruite_page/my_projects/my_projects_screen.dart';
 import 'package:khedma_link/screens/recruite_page/recruiter_home_screen.dart';
 import 'package:khedma_link/screens/recruite_page/recruiter_profile_page/recruiter_settings.dart';
@@ -47,7 +47,7 @@ class NavigationControllerrecruiter extends GetxController {
 
   final screens = [
     const MyProjectsScreen(),
-    const AddProjectsScreen(),
+    const AddScreen(),
     const RecruiterHomeScreen(),
     const RecruiterSettings(),
   ];

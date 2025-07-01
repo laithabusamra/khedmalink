@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/model/freelancer_model.dart';
 import 'package:khedma_link/screens/recruite_page/my_projects/my_project_todo.dart';
+import 'package:khedma_link/screens/recruite_page/recruiter_navigation_menu.dart';
 
 class MyProjectsScreen extends StatefulWidget {
   final String initialFilter;
@@ -19,7 +20,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
     offeredPrice: '\$50/hour',
   );
 
-  final List<Map<String, dynamic>> _projects = [
+  List<Map<String, dynamic>> _projects = [
     {
       'title': 'Mobile App Development',
       'description': 'Build a Flutter e-commerce app with Firebase backend',
@@ -73,6 +74,10 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
   void initState() {
     super.initState();
     _selectedFilterKey = widget.initialFilter;
+    final newProject = Get.arguments;
+    if (newProject != null) {
+      _projects.insert(0, newProject);
+    }
   }
 
   void _markProjectDone(int index) {
@@ -97,7 +102,6 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       height: 28,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        // ignore: deprecated_member_use
         color: color.withOpacity(0.2),
         border: Border.all(color: color, width: 2),
       ),
@@ -109,8 +113,8 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
     return Text(
       text,
       style: style?.copyWith(
-        color: highlight ? Colors.green[800] : style.color,
-        fontWeight: highlight ? FontWeight.bold : style.fontWeight,
+        color: highlight ? Colors.green[800] : style?.color,
+        fontWeight: highlight ? FontWeight.bold : style?.fontWeight,
       ),
     );
   }
@@ -159,14 +163,12 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          // ignore: deprecated_member_use
           color: _statusColors[status]?.withOpacity(0.05) ?? Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
               color: _statusColors[status] ?? Colors.black12, width: 1.5),
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.1),
               blurRadius: 5,
               offset: const Offset(0, 2),
@@ -232,7 +234,10 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Get.offAll(() => const RecruiterNavigationMenu()),
+        ),
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
         title: Text(

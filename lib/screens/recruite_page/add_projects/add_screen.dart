@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khedma_link/constants/colors.dart';
 import 'package:khedma_link/constants/helper_class/device_utils_class.dart';
+import 'package:khedma_link/screens/recruite_page/my_projects/my_projects_screen.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -30,7 +31,7 @@ class _AddScreenState extends State<AddScreen> {
   void _addSkill() {
     if (_skillController.text.isNotEmpty) {
       setState(() {
-        _skills.add(_skillController.text);
+        _skills.add(_skillController.text.trim());
         _skillController.clear();
       });
     }
@@ -40,6 +41,20 @@ class _AddScreenState extends State<AddScreen> {
     setState(() {
       _skills.removeAt(index);
     });
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      final newProject = {
+        'title': _titleController.text.trim(),
+        'description': _descriptionController.text.trim(),
+        'price': '\$${_priceController.text.trim()} per hour',
+        'skills': List<String>.from(_skills),
+        'status': 'in_progress',
+      };
+
+      Get.off(() => MyProjectsScreen(), arguments: newProject);
+    }
   }
 
   @override
@@ -63,7 +78,6 @@ class _AddScreenState extends State<AddScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Centered Logo
               Center(
                 child: Image.asset(
                   'assets/images/Kl.png',
@@ -72,8 +86,6 @@ class _AddScreenState extends State<AddScreen> {
                 ),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              // Project Title
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
@@ -84,16 +96,11 @@ class _AddScreenState extends State<AddScreen> {
                   filled: true,
                   fillColor: Colors.grey[50],
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
-                  }
-                  return null;
-                },
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Please enter a title'
+                    : null,
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-
-              // Description
               TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
@@ -105,16 +112,11 @@ class _AddScreenState extends State<AddScreen> {
                   fillColor: Colors.grey[50],
                 ),
                 maxLines: 4,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Please enter a description'
+                    : null,
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-
-              // Price
               TextFormField(
                 controller: _priceController,
                 decoration: InputDecoration(
@@ -129,28 +131,19 @@ class _AddScreenState extends State<AddScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty)
                     return 'Please enter a price';
-                  }
-                  if (double.tryParse(value) == null) {
-                    return 'Please enter a valid number';
-                  }
+                  if (double.tryParse(value) == null)
+                    return 'Enter a valid number';
                   return null;
                 },
               ),
               const SizedBox(height: TSizes.spaceBtwItems),
-
-              // Required Skills Section
               const Text(
                 'Required Skills',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 8),
-
-              // Skills Input
               Row(
                 children: [
                   Expanded(
@@ -168,14 +161,12 @@ class _AddScreenState extends State<AddScreen> {
                           onPressed: _addSkill,
                         ),
                       ),
-                      onFieldSubmitted: (value) => _addSkill(),
+                      onFieldSubmitted: (_) => _addSkill(),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-
-              // Skills Chips
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -190,8 +181,6 @@ class _AddScreenState extends State<AddScreen> {
                 }).toList(),
               ),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              // Save Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -207,10 +196,7 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                   child: const Text(
                     'SAVE PROJECT',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -219,19 +205,5 @@ class _AddScreenState extends State<AddScreen> {
         ),
       ),
     );
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      final newProject = {
-        'title': _titleController.text,
-        'description': _descriptionController.text,
-        'price': '\$${_priceController.text} per hour',
-        'skills': List<String>.from(_skills), // Add skills to the project
-        'completed': true,
-      };
-
-      Get.back(result: newProject);
-    }
   }
 }

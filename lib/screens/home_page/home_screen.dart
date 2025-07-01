@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
       role: "Flutter Developer",
       offeredPrice: "\$70/hour",
     );
-
     return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
